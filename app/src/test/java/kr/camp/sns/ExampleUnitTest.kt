@@ -1,4 +1,4 @@
-package com.example.snsappproject
+package kr.camp.sns
 
 import org.junit.Test
 
