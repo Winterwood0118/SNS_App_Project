@@ -170,17 +170,12 @@
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:numColumns="3"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/baseLine" />
-
-    <include
-        android:id="@+id/myPagePostingItem"
-        layout="@layout/item_my_page_posting"
-        android:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
