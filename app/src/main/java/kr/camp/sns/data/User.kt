@@ -18,10 +18,10 @@ data class User(
         private set
 
     private val _postings = mutableListOf<Posting>()
-    val posting: List<Posting> get() = _postings
+    val postings: List<Posting> get() = _postings
 
-    fun addPosting(posting: Posting) {
-        _postings.add(posting)
+    fun addPostings(vararg posting: Posting) {
+        _postings.addAll(posting)
     }
 
     fun setDescription(description: String) {
