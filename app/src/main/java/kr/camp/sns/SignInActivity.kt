@@ -43,7 +43,7 @@ class SignInActivity : AppCompatActivity() {
             // binding함수 작성
             val idEdit = binding.idEditText.toString()
 
-            // dataClass로 이용해야 될 것 같은데....
+            // dataClass로 이용해야 될 것 같은데.... 어떻게 사용 하누
             intent.putExtra("id", idEdit)
             // 로그인 유효성 검사는 data class를 이용
             // 애니메이션 작동하면서 메인액티비티로 이동
