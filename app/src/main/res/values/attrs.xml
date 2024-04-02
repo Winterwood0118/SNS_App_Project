@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="CircleImageView">
-        <attr name="android:src" format="integer"/>
+        <attr name="android:src" format="reference|color"/>
+        <attr name="android:layout_width" format="dimension"/>
+        <attr name="android:layout_height" format="dimension"/>
     </declare-styleable>
 </resources>
