@@ -2,17 +2,9 @@ package kr.camp.sns
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.widget.addTextChangedListener
-import com.google.android.material.snackbar.Snackbar
-import kr.camp.sns.databinding.ActivityMainBinding
 import kr.camp.sns.databinding.ActivitySignInBinding
 import java.util.regex.Pattern
 
@@ -41,7 +33,9 @@ class SignInActivity : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_TEXT, idEdit)
             if (!isRegularId()) {
                 Toast.makeText(this, "아이디를 입력해주세요", Toast.LENGTH_LONG).show()
-            } else {
+            } else if(!isRegularPassword()) {
+                Toast.makeText(this, "비밀번호를 입력해주세요", Toast.LENGTH_LONG).show()
+            }else {
                 startActivity(intent)
                 loginStart()
             }
@@ -60,36 +54,41 @@ class SignInActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_right_end, R.anim.slide_left_end)
     }
 
-    fun idText() {
-        binding.idEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // 텍스트가 변경되기 전에 호출된다
-            }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                // 텍스트가 변경될 때마다 호출된다.
-                // 아이디을 입력할 때 실시간으로 이메일 형식을 검사한다.
-                isRegularId()
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                // 텍스트가 변경된 후 호출된다
-            }
-
-        })
-    }
 
     // 아이디 유효성 검사 함수
     private fun isRegularId(): Boolean {
         val english = binding.idEditText.text.toString().trim()
         // 영어, 글자 수는 7~10자
-        val idPattern = "^(?=.*[A-Za-z])[A-Za-z]{7,10}$"
+        val idPattern = "^(?=.*[A-Za-z]){7,10}$"
         val pattern = Pattern.matches(idPattern, english)
         if (pattern) {
             // 아이디의 형식이 맞을 경우
+            //텍스트 박스가 파랑색으로 표시
+            binding.idEditText.setBackgroundResource(R.drawable.true_box)
             return true
         } else {
             // 아이디의 형식이 틀릴 경우
+            // 텍스트 박스가 빨간색으로 표시
+            binding.idEditText.setBackgroundResource(R.drawable.false_box)
+            return false
+        }
+    }
+
+
+    // 비밀번호 유효성 검사 함수
+    private fun isRegularPassword(): Boolean {
+        val english = binding.passwordEditText.toString().trim() // 띄어쓰기 삭제
+        // 영어, 특수문자, 10~15자리
+        val passwordPattern = "^(?=.*[A-Za-z])(?=.*[!@#\$%^&+=]){10,15}.*$"
+        val pattern = Pattern.matches(passwordPattern, english)
+        if (pattern) {
+            // 비밀번호의 형식이 맞을 경우
+            binding.passwordEditText.setBackgroundResource(R.drawable.true_box)
+            return true
+        } else {
+            binding.passwordEditText.setBackgroundResource(R.drawable.true_box)
+            // 비밀번호의 형식이 틀릴 경우
             return false
         }
     }

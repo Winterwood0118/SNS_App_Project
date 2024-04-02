@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SNS App Project</string>
     <string name="text_test"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam maecenas mi non sed ut odio. Non, justo, sed facilisi et. Eget viverra urna, vestibulum egestas faucibus egestas. Sagittis nam velit volutpat eu nunc.</string>
+
 </resources>
