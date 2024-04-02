@@ -39,10 +39,10 @@ class SignInActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             // 메인 페이지로 이동
             val intent = Intent(this, MainActivity::class.java)
-            val user = UserRegistry()
             // intent로 id 값 전달
             // binding함수 작성
             val idEdit = binding.idEditText.toString()
+
             // dataClass로 이용해야 될 것 같은데....
             intent.putExtra("id", idEdit)
             // 로그인 유효성 검사는 data class를 이용
