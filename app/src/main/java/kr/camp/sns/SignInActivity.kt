@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import kr.camp.sns.databinding.ActivitySignInBinding
 import java.util.regex.Pattern
@@ -112,7 +114,6 @@ class SignInActivity : AppCompatActivity() {
         } else {
             // 아이디의 형식이 틀릴 경우
             // 텍스트 박스가 빨간색으로 표시
-            idEdit.setText("다시 입력해 주세요")
             idEdit.setBackgroundResource(R.drawable.false_box)
             return false
         }
@@ -122,6 +123,7 @@ class SignInActivity : AppCompatActivity() {
     // 비밀번호 유효성 검사 함수
     private fun isRegularPassword(): Boolean {
         val english = binding.passwordEditText.toString().trim() // 띄어쓰기 삭제
+        val notPasswordTextView = binding.notPassword
         // 영어, 특수문자, 10~15자리
         val passwordPattern = "^(?=.*[A-Za-z])(?=.*[!@#\$%^&+=]){10,15}.*$"
         val pattern = Pattern.matches(passwordPattern, english)
@@ -131,6 +133,8 @@ class SignInActivity : AppCompatActivity() {
             passwordEdit.setBackgroundResource(R.drawable.true_box)
             return true
         } else {
+            // 첫화면에 보이지 않았던 비밀번호가 틀렸습니다가 보임
+            notPasswordTextView.visibility = View.VISIBLE
             passwordEdit.setBackgroundResource(R.drawable.true_box)
             // 비밀번호의 형식이 틀릴 경우
             return false
