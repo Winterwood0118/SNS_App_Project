@@ -8,6 +8,9 @@ data class User(
     val name: String
 ) : Serializable {
 
+    var description = ""
+        private set
+
     var birthDate = "2000년 1월 1일"
         private set
 
@@ -19,6 +22,10 @@ data class User(
 
     fun addPosting(posting: Posting) {
         _postings.add(posting)
+    }
+
+    fun setDescription(description: String) {
+        this.description = description
     }
 
     fun setBirthDate(birthDate: String) {
