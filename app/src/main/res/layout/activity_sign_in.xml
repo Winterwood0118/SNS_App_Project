@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Facebook으로 로그인"
-        android:textColor="#1E88E5"
+        android:textColor="@color/blue"
         android:textSize="17sp"
         android:layout_marginTop="30dp"
         android:gravity="center"
@@ -68,8 +68,8 @@
 
     <TextView
         android:id="@+id/signInTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
         android:text="가입하기"
         android:textSize="17sp"
         android:layout_marginTop="30dp"
