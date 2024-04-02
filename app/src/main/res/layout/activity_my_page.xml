@@ -12,24 +12,25 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="아이디"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/backspaceImageView"
         app:layout_constraintStart_toEndOf="@+id/backspaceImageView"
         app:layout_constraintTop_toTopOf="@+id/backspaceImageView" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/backspaceImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:background="@drawable/backspace"
+        android:onClick="onMyPageBackspaceButtonClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/backspace" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/profileImageView"
@@ -87,54 +88,77 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mbtiTextView" />
 
     <include
-        android:id="@+id/postingCountTextView"
+        android:id="@+id/postingCountLayout"
         layout="@layout/layout_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="55dp"
         app:layout_constraintBottom_toBottomOf="@+id/profileImageView"
+        app:layout_constraintEnd_toStartOf="@+id/followerCountLayout"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/profileImageView"
         app:layout_constraintTop_toTopOf="@+id/profileImageView" />
 
     <include
-        android:id="@+id/followerCountTextView"
+        android:id="@+id/followerCountLayout"
         layout="@layout/layout_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        app:layout_constraintBottom_toBottomOf="@+id/postingCountTextView"
-        app:layout_constraintStart_toEndOf="@+id/postingCountTextView"
-        app:layout_constraintTop_toTopOf="@+id/postingCountTextView" />
+        android:layout_marginStart="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/postingCountLayout"
+        app:layout_constraintEnd_toStartOf="@+id/followingCountLayout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/postingCountLayout"
+        app:layout_constraintTop_toTopOf="@+id/postingCountLayout" />
 
     <include
-        android:id="@+id/followingCountTextView"
+        android:id="@+id/followingCountLayout"
         layout="@layout/layout_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        app:layout_constraintBottom_toBottomOf="@+id/followerCountTextView"
-        app:layout_constraintStart_toEndOf="@+id/followerCountTextView"
-        app:layout_constraintTop_toTopOf="@+id/followerCountTextView" />
-
-    <Button
-        android:id="@+id/followButton"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/follow_button"
-        android:text="팔로우"
-        android:textStyle="bold"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/followerCountLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/followerCountLayout"
+        app:layout_constraintTop_toTopOf="@+id/followerCountLayout" />
+
+    <include
+        android:id="@+id/nameEditButton"
+        layout="@layout/layout_button"
+        android:layout_width="115dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mbtiEditButton"
+        app:layout_constraintEnd_toStartOf="@+id/mbtiEditButton"
+        app:layout_constraintTop_toTopOf="@+id/mbtiEditButton"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <include
+        android:id="@+id/mbtiEditButton"
+        layout="@layout/layout_button"
+        android:layout_width="115dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/descriptionTextView"
+        app:layout_constraintStart_toStartOf="@+id/descriptionTextView"
         app:layout_constraintTop_toBottomOf="@+id/descriptionTextView" />
+
+    <include
+        android:id="@+id/descriptionEditButton"
+        layout="@layout/layout_button"
+        android:layout_width="115dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mbtiEditButton"
+        app:layout_constraintStart_toEndOf="@+id/mbtiEditButton"
+        app:layout_constraintTop_toTopOf="@+id/mbtiEditButton"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/gridImageView"
@@ -143,7 +167,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/followButton"
+        app:layout_constraintTop_toBottomOf="@+id/mbtiEditButton"
         app:srcCompat="@drawable/grid" />
 
     <View
@@ -153,7 +177,6 @@
         android:layout_marginTop="7dp"
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/gridImageView" />
 
@@ -167,12 +190,12 @@
         app:layout_constraintTop_toBottomOf="@id/selectedLine" />
 
     <GridView
-        android:id="@+id/gridView"
+        android:id="@+id/postingListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="1dp"
-        android:numColumns="3"
         android:gravity="center"
+        android:numColumns="3"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

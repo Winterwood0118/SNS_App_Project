@@ -6,27 +6,25 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import androidx.core.view.setPadding
+import kr.camp.sns.data.Posting
 
 class MyPagePostingAdapter(
     private val context: Context,
-    private val imageDrawableIds: List<Int>
+    private val postings: List<Posting>
 ) : BaseAdapter() {
 
-    override fun getCount(): Int = imageDrawableIds.size
+    override fun getCount(): Int = postings.size
 
-    override fun getItem(position: Int): Int = imageDrawableIds[position]
+    override fun getItem(position: Int): Posting = postings[position]
 
     override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val imageView = convertView as? ImageView ?: run {
-            ImageView(context).apply {
-                scaleType = ImageView.ScaleType.CENTER
-                adjustViewBounds = true
-                setPadding(3)
-            } // xml에서 가져오기
+        val imageView = convertView as? ImageView ?: ImageView(context).apply {
+            adjustViewBounds = true
+            setPadding(3)
         }
-        val imageDrawableId = getItem(position)
+        val imageDrawableId = getItem(position).imageDrawableId
         imageView.setImageResource(imageDrawableId)
         return imageView
     }
