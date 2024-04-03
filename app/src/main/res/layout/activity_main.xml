@@ -73,6 +73,40 @@
 
             </HorizontalScrollView>
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mainUserScrollView">
+
+                <include
+                    android:id="@+id/mainPost1"
+                    layout="@layout/custom_post_item" />
+
+                <include
+                    android:id="@+id/mainPost2"
+                    layout="@layout/custom_post_item" />
+
+                <include
+                    android:id="@+id/mainPost3"
+                    layout="@layout/custom_post_item" />
+
+                <include
+                    android:id="@+id/mainPost4"
+                    layout="@layout/custom_post_item" />
+
+                <include
+                    android:id="@+id/mainPost5"
+                    layout="@layout/custom_post_item" />
+
+
+            </LinearLayout>
+
+
+
+<!-- 리사이클러 뷰
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mainPostRecyclerView"
                 android:layout_width="match_parent"
@@ -81,8 +115,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mainUserScrollView"
                 tools:listitem="@layout/custom_post_item" />
+            -->
+<!-- 리스트 뷰
+            <ListView
+                android:nestedScrollingEnabled="true"
+                android:orientation="vertical"
+                android:id="@+id/mainPostList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mainUserScrollView"
+                tools:listitem="@layout/custom_post_item" />-->
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
