@@ -2,20 +2,19 @@
 
 package kr.camp.sns
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.os.IResultReceiver._Parcel
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import kr.camp.sns.data.User
 import kr.camp.sns.databinding.ActivitySignInBinding
+import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.registry.UserRegistry
 import java.util.regex.Pattern
 
@@ -25,9 +24,9 @@ class SignInActivity : AppCompatActivity() {
     var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
-                val id = it.data?.getStringExtra("id") ?: ""                // 아이디 수신 혹은 ""
+                val user = it.data?.getSerializableExtra(IntentKey.USER) as User        // 아이디 수신 혹은 ""
                 val passworde = it.data?.getStringExtra("password") ?: ""    // 비밀번호 수신 혹은 ""
-                binding.idEditText.setText(id)
+
                 binding.passwordEditText.setText(passworde)
             }
         }
@@ -36,25 +35,29 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val userRegistry = UserRegistry.getInstance()
+
         // 로그인 버튼을 눌렀을 때의 작동
         binding.loginButton.setOnClickListener {
             // 메인 페이지로 이동
-            val intent = Intent(this, MainActivity::class.java)
-            val userName = intent.getSerializableExtra("userName") as User
-            intent.putExtra("userName", userName.name)
-
-
-            // 애니메이션 작동하면서 메인액티비티로 이동
-            if(!isRegularId() && !isRegularPassword()) {
-                Toast.makeText(this, "아이디와 비밀번호를 입력해주세요", Toast.LENGTH_LONG).show()
+            val inputId = binding.idEditText.text.toString()
+            val inputPassword = binding.passwordEditText.text.toString()
+            var user = userRegistry.findUserByIdAndPassword(inputId, inputPassword)
+            if (user == null) {
+                // 잘못된 비밀번호와 아이디
             } else if (!isRegularId()) {
-                Toast.makeText(this, "영어와 숫자를 포함하여 8~20자리로 입력해야 합니다", Toast.LENGTH_LONG).show()
-            } else if(!isRegularPassword()) {
-                Toast.makeText(this, "영어와 숫자, 특수문자를 조합하여 8~20자리로 입력해야 합니다", Toast.LENGTH_LONG).show()
+                // 아이디 잘 못됨
+            } else if (!isRegularPassword()) {
+                // 비밀번호 잘못됨
             } else {
-                startActivity(intent)
-                loginStart()
+                // 메인으로 넘김
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra(IntentKey.USER, user) // 로그인 성공한 데이터가 모두 넘겅감
+                intent.putExtra(IntentKey.LOGIN, true) // 로그인 이 맞으면 넘김
+                setResult(Activity.RESULT_OK, intent) // 좀 있다 검색
+                finish()
             }
+
         }
 
         // 가입하기 텍스트를 눌렀을 떄의 작동
@@ -98,7 +101,7 @@ class SignInActivity : AppCompatActivity() {
     // overridePendingTransition (시작할때 애니메이션, 끝날때 애니메이션)
     // overridePendingTransition을 함수로 만들어 밖으로 뺌
     fun loginStart() {
-        overridePendingTransition(R.anim.slide_right_end, R.anim.slide_left_end)
+        overridePendingTransition(R.anim.none, R.anim.slide_right_end)
     }
 
 
