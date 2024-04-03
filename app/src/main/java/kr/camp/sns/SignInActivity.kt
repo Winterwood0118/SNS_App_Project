@@ -24,10 +24,11 @@ class SignInActivity : AppCompatActivity() {
     var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
-                val user = it.data?.getSerializableExtra(IntentKey.USER) as User        // 아이디 수신 혹은 ""
-                val passworde = it.data?.getStringExtra("password") ?: ""    // 비밀번호 수신 혹은 ""
-
-                binding.passwordEditText.setText(passworde)
+                val user = it.data?.getSerializableExtra(IntentKey.USER) as User
+                val id = user.id
+                val password = user.password
+                binding.idEditText.setText(id)
+                binding.passwordEditText.setText(password)
             }
         }
 
@@ -44,11 +45,11 @@ class SignInActivity : AppCompatActivity() {
             val inputPassword = binding.passwordEditText.text.toString()
             var user = userRegistry.findUserByIdAndPassword(inputId, inputPassword)
             if (user == null) {
-                // 잘못된 비밀번호와 아이디
+                toast("잘못된 아이디와 비밀번호 입니다")
             } else if (!isRegularId()) {
-                // 아이디 잘 못됨
+                toast("아이디의 조합이 틀렸습니다")
             } else if (!isRegularPassword()) {
-                // 비밀번호 잘못됨
+                toast("비밀번호의 조합이 틀렸습니다")
             } else {
                 // 메인으로 넘김
                 val intent = Intent(this, MainActivity::class.java)
@@ -147,5 +148,8 @@ class SignInActivity : AppCompatActivity() {
             passwordEdit.setBackgroundResource(R.drawable.false_box)
             return false
         }
+    }
+    fun toast(message : String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }
