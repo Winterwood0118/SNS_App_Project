@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import kr.camp.sns.data.User
@@ -39,13 +40,10 @@ class SignInActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             // 메인 페이지로 이동
             val intent = Intent(this, MainActivity::class.java)
-            // intent로 id 값 전달
-            // binding함수 작성
-            val idEdit = binding.idEditText.toString()
+            val userName = intent.getSerializableExtra("userName") as User
+            intent.putExtra("userName", userName.name)
 
-            // dataClass로 이용해야 될 것 같은데.... 어떻게 사용 하누
-            intent.putExtra("id", idEdit)
-            // 로그인 유효성 검사는 data class를 이용
+
             // 애니메이션 작동하면서 메인액티비티로 이동
             if(!isRegularId() && !isRegularPassword()) {
                 Toast.makeText(this, "아이디와 비밀번호를 입력해주세요", Toast.LENGTH_LONG).show()
@@ -84,7 +82,6 @@ class SignInActivity : AppCompatActivity() {
         // Log.d("edit", binding.idEditText.text.toString())
         binding.passwordEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // 텍스트가 변경되기 전 호출
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -93,7 +90,6 @@ class SignInActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                // 텍스트가 변경된 후 호출
             }
 
         })
@@ -111,7 +107,7 @@ class SignInActivity : AppCompatActivity() {
         val idEnglish = binding.idEditText.text.toString().trim()
         var idEdit = binding.idEditText
         // 영어, 숫자
-        val idPattern = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z[0-9]]{8,20}$"
+        val idPattern = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z[0-9]]{7,10}$"
         val pattern = Pattern.matches(idPattern, idEnglish)
         if (pattern) {
             // 아이디의 형식이 맞을 경우
@@ -131,7 +127,7 @@ class SignInActivity : AppCompatActivity() {
     private fun isRegularPassword(): Boolean {
         val passwordEnglish = binding.passwordEditText.text.toString().trim() // 띄어쓰기 삭제
         val notPasswordTextView = binding.notPassword
-        // 영어, 특수문자, 8~15자리
+        // 영어, 특수문자, 8~20자리
         val passwordPattern = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&.])[A-Za-z[0-9]$@$!%*#?&.]{8,20}$"
         val pwdPattern = Pattern.matches(passwordPattern, passwordEnglish)
         val passwordEdit = binding.passwordEditText
