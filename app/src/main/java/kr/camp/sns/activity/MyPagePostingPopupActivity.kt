@@ -3,7 +3,7 @@ package kr.camp.sns.activity
 import android.app.Activity
 import android.os.Bundle
 import android.view.Window
-import kr.camp.sns.activity.intent.IntentKey
+import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.data.Posting
 import kr.camp.sns.databinding.ActivityMyPagePostingPopupBinding
 

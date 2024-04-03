@@ -9,7 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kr.camp.sns.R
 import kr.camp.sns.activity.adapter.MyPagePostingAdapter
-import kr.camp.sns.activity.intent.IntentKey
+import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.data.Posting
 import kr.camp.sns.data.User
 import kr.camp.sns.databinding.ActivityMyPageBinding

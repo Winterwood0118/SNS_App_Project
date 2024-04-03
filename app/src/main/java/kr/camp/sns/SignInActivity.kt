@@ -7,29 +7,27 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
+import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.data.User
 import kr.camp.sns.databinding.ActivitySignInBinding
-import kr.camp.sns.registry.UserRegistry
 import java.util.regex.Pattern
 
 class SignInActivity : AppCompatActivity() {
+
     private val binding by lazy { ActivitySignInBinding.inflate(layoutInflater) }
 
-    var resultLauncher =
+    private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
-                val id = it.data?.getStringExtra("id") ?: ""                // 아이디 수신 혹은 ""
-                val passworde = it.data?.getStringExtra("password") ?: ""    // 비밀번호 수신 혹은 ""
+                val intent = it.data
+                val user = intent?.getSerializableExtra(IntentKey.USER) as? User
+                val id = user?.id ?: ""                // 아이디 수신 혹은 ""
+                val password = user?.password ?: ""    // 비밀번호 수신 혹은 ""
                 binding.idEditText.setText(id)
-                binding.passwordEditText.setText(passworde)
+                binding.passwordEditText.setText(password)
             }
         }
 
@@ -41,24 +39,24 @@ class SignInActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             // 메인 페이지로 이동
             val intent = Intent(this, MainActivity::class.java)
-/*            val userName = intent.getSerializableExtra("userName") as User
-            intent.putExtra("userName", userName.name)*/
-            intent.putExtra("extra_login",true)
+            /*            val userName = intent.getSerializableExtra("userName") as User
+                        intent.putExtra("userName", userName.name)*/
+            intent.putExtra(IntentKey.LOGIN, true)
             setResult(Activity.RESULT_OK, intent)
             finish()
             loginStart()
 
             // 애니메이션 작동하면서 메인액티비티로 이동
-/*            if(!isRegularId() && !isRegularPassword()) {
-                Toast.makeText(this, "아이디와 비밀번호를 입력해주세요", Toast.LENGTH_LONG).show()
-            } else if (!isRegularId()) {
-                Toast.makeText(this, "영어와 숫자를 포함하여 8~20자리로 입력해야 합니다", Toast.LENGTH_LONG).show()
-            } else if(!isRegularPassword()) {
-                Toast.makeText(this, "영어와 숫자, 특수문자를 조합하여 8~20자리로 입력해야 합니다", Toast.LENGTH_LONG).show()
-            } else {
-                startActivity(intent)
-                loginStart()
-            }*/
+            /*            if(!isRegularId() && !isRegularPassword()) {
+                            Toast.makeText(this, "아이디와 비밀번호를 입력해주세요", Toast.LENGTH_LONG).show()
+                        } else if (!isRegularId()) {
+                            Toast.makeText(this, "영어와 숫자를 포함하여 8~20자리로 입력해야 합니다", Toast.LENGTH_LONG).show()
+                        } else if(!isRegularPassword()) {
+                            Toast.makeText(this, "영어와 숫자, 특수문자를 조합하여 8~20자리로 입력해야 합니다", Toast.LENGTH_LONG).show()
+                        } else {
+                            startActivity(intent)
+                            loginStart()
+                        }*/
         }
 
         // 가입하기 텍스트를 눌렀을 떄의 작동
@@ -132,7 +130,8 @@ class SignInActivity : AppCompatActivity() {
         val passwordEnglish = binding.passwordEditText.text.toString().trim() // 띄어쓰기 삭제
         val notPasswordTextView = binding.notPassword
         // 영어, 특수문자, 8~20자리
-        val passwordPattern = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&.])[A-Za-z[0-9]$@$!%*#?&.]{8,20}$"
+        val passwordPattern =
+            "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&.])[A-Za-z[0-9]$@$!%*#?&.]{8,20}$"
         val pwdPattern = Pattern.matches(passwordPattern, passwordEnglish)
         val passwordEdit = binding.passwordEditText
         if (pwdPattern) {

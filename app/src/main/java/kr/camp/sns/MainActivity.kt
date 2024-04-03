@@ -11,10 +11,12 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import kr.camp.sns.activity.MyPageActivity
+import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
+
     private var isLogin = false
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var startForResult: ActivityResultLauncher<Intent>
@@ -35,14 +37,14 @@ class MainActivity : AppCompatActivity() {
         startForResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
-                    isLogin = result.data?.getBooleanExtra("extra_login", false) ?: false
+                    isLogin = result.data?.getBooleanExtra(IntentKey.LOGIN, false) ?: false
                 }
             }
         binding.mainLoginImageView.setOnClickListener {
-            if (isLogin){
+            if (isLogin) {
                 val intent = Intent(this, MyPageActivity::class.java)
                 startActivity(intent)
-            }else{
+            } else {
                 val intent = Intent(this, SignInActivity::class.java)
                 startForResult.launch(intent)
             }
@@ -64,15 +66,17 @@ class MainActivity : AppCompatActivity() {
                 customPostCountOfLikeTextView.text = countOfLike
                 customPostNameTextView.text = userName
                 customPostMainTextView.text = postString
-                customPostMainImageView.apply{
+                customPostMainImageView.apply {
                     setImageResource(post.imageDrawableId)
                     setOnClickListener {
-                        Toast.makeText(this@MainActivity, "${i+1} 번 포스트", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "${i + 1} 번 포스트", Toast.LENGTH_SHORT)
+                            .show()
                         val intent = Intent(this@MainActivity, DetailActivity::class.java)
 
+                        // User의 이름, Posting 객체 넘겨주셔야 합니다
                         intent.apply {
-                            putExtra("extra_post", post)
-                            putExtra("extra_posting_user_name", userName)
+                            putExtra(IntentKey.POST, post)
+                            putExtra(IntentKey.POSTING_USER_NAME, userName)
                         }
 
                         startActivity(intent)
