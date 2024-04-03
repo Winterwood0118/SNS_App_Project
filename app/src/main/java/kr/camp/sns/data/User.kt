@@ -28,4 +28,5 @@ data class User(
     fun setMBTI(mbti: String) {
         this.mbti = mbti
     }
+
 }

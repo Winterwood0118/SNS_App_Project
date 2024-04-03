@@ -12,14 +12,14 @@ class UserRegistry {
         }
     }
 
-    private val users = mutableListOf<User>()
+    private val users = mutableListOf<User>() // 앱이 실행되는 동안에만 저장되는 유저정보
 
     fun isUser(id: String): Boolean {
-        return users.any { it.id == id }
+        return users.any { it.id == id } // id 중복검사 함수
     }
 
     fun addUser(user: User) {
-        users.add(user)
+        users.add(user) // 회원가입 성공 시 유저 정보를 List에 추가
     }
 
     fun findUserByIdAndPassword(id: String, password: String): User? {
