@@ -1,11 +1,9 @@
-@file:Suppress("DEPRECATION")
 
 package kr.camp.sns
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.os.IResultReceiver._Parcel
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -18,8 +16,14 @@ import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.registry.UserRegistry
 import java.util.regex.Pattern
 
+@Suppress("DEPRECATION")
 class SignInActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySignInBinding.inflate(layoutInflater) }
+//    private val defaultUser = arrayOf(
+//        User("differ445", "AKrwjrdjf45#", "test1"),
+//        User("aevde456", "wofj4886$$", "test2"),
+//        User("ewfr735", "fwr4865#$", "test3")
+//    )
 
     var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -31,32 +35,32 @@ class SignInActivity : AppCompatActivity() {
                 binding.passwordEditText.setText(password)
             }
         }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val userRegistry = UserRegistry.getInstance()
+        val userRegistry = UserRegistry.getInstance() // 싱글톤 구현 방법
 
         // 로그인 버튼을 눌렀을 때의 작동
         binding.loginButton.setOnClickListener {
-            // 메인 페이지로 이동
             val inputId = binding.idEditText.text.toString()
             val inputPassword = binding.passwordEditText.text.toString()
-            var user = userRegistry.findUserByIdAndPassword(inputId, inputPassword)
+            val user = userRegistry.findUserByIdAndPassword(inputId, inputPassword)
+
             if (user == null) {
                 toast("잘못된 아이디와 비밀번호 입니다")
             } else if (!isRegularId()) {
                 toast("아이디의 조합이 틀렸습니다")
             } else if (!isRegularPassword()) {
                 toast("비밀번호의 조합이 틀렸습니다")
-            } else {
+            } else if (human.toString()) {
                 // 메인으로 넘김
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra(IntentKey.USER, user) // 로그인 성공한 데이터가 모두 넘겅감
-                intent.putExtra(IntentKey.LOGIN, true) // 로그인 이 맞으면 넘김
-                setResult(Activity.RESULT_OK, intent) // 좀 있다 검색
-                finish()
+                intent.putExtra(IntentKey.LOGIN, true) // 로그인이 맞으면 넘김
+                setResult(Activity.RESULT_OK, intent) // intent의 결과가 맞으면 이동
+                finish() // 꺼짐
+                loginStart() // 애니메이션 시작
             }
 
         }
@@ -97,6 +101,7 @@ class SignInActivity : AppCompatActivity() {
             }
 
         })
+
     }
 
     // overridePendingTransition (시작할때 애니메이션, 끝날때 애니메이션)
@@ -152,4 +157,5 @@ class SignInActivity : AppCompatActivity() {
     fun toast(message : String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
+
 }
