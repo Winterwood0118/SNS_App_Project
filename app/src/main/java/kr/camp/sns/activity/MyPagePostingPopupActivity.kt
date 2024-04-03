@@ -3,6 +3,7 @@ package kr.camp.sns.activity
 import android.app.Activity
 import android.os.Bundle
 import android.view.Window
+import kr.camp.sns.activity.intent.IntentKey
 import kr.camp.sns.data.Posting
 import kr.camp.sns.databinding.ActivityMyPagePostingPopupBinding
 
@@ -15,7 +16,7 @@ class MyPagePostingPopupActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        posting = intent.getSerializableExtra("Posting") as Posting
+        posting = intent.getSerializableExtra(IntentKey.POSTING) as Posting
 
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(binding.root)

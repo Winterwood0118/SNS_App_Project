@@ -8,13 +8,13 @@ data class User(
     val name: String
 ) : Serializable {
 
-    var description = ""
-        private set
-
-    var birthDate = "2000년 1월 1일"
+    var profileDrawableId = -1
         private set
 
     var mbti = "ENFP"
+        private set
+
+    var description = ""
         private set
 
     private val _postings = mutableListOf<Posting>()
@@ -24,15 +24,15 @@ data class User(
         _postings.addAll(posting)
     }
 
-    fun setDescription(description: String) {
-        this.description = description
-    }
-
-    fun setBirthDate(birthDate: String) {
-        this.birthDate = birthDate
+    fun setProfileDrawableId(profileDrawableId: Int) {
+        this.profileDrawableId = profileDrawableId
     }
 
     fun setMBTI(mbti: String) {
         this.mbti = mbti
+    }
+
+    fun setDescription(description: String) {
+        this.description = description
     }
 }
