@@ -40,7 +40,9 @@ class SignInActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             // 메인 페이지로 이동
             val intent = Intent(this, MainActivity::class.java)
-            val userName = intent.getSerializableExtra("userName") as User
+            //val userName = intent.getSerializableExtra("userName") as User
+            // 가짜 User data class
+            val userName:User = User(id = "", password = "", name = "사람")
             intent.putExtra("userName", userName.name)
 
 
