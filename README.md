@@ -35,6 +35,5 @@
 ---
 
 1. Constraint Layout
-2. RecyclerView
-3. ViewBinding
-4. SingleTone
+2. ViewBinding
+3. SingleTone
