@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="회원가입"
+        android:textColor="#777575"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/signUpSignupButton"
+        android:layout_width="345dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:text="가입하기( Sign up )"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_round"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpRepasswordeditText" />
+
+    <EditText
+        android:id="@+id/signUpRepasswordeditText"
+        android:layout_width="345dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/rectangle"
+        android:ems="10"
+        android:hint="비밀번호를 한번 더 입력해 주세요!"
+        android:inputType="textPassword"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpPasswordeditText" />
+
+    <EditText
+        android:id="@+id/signUpNameeditText"
+        android:layout_width="345dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/rectangle"
+        android:ems="10"
+        android:hint="이름을 입력해 주세요!"
+        android:inputType="text"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpIdeditText" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="아이디( ID )"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/signUpIdeditText"
+        app:layout_constraintStart_toStartOf="@+id/signUpIdeditText" />
+
+    <EditText
+        android:id="@+id/signUpIdeditText"
+        android:layout_width="230dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="75dp"
+        android:background="@drawable/rectangle"
+        android:ems="10"
+        android:hint="아이디를 입력해 주세요!"
+        android:inputType="text"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/signUpIdcheckButton"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="이름( Name )"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/signUpNameeditText"
+        app:layout_constraintStart_toStartOf="@+id/signUpNameeditText" />
+
+    <Button
+        android:id="@+id/signUpIdcheckButton"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:text="중복확인"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_round"
+        app:layout_constraintBottom_toBottomOf="@+id/signUpIdeditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/signUpIdeditText"
+        app:layout_constraintTop_toTopOf="@+id/signUpIdeditText" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="비밀번호( Password )"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/signUpPasswordeditText"
+        app:layout_constraintStart_toStartOf="@+id/signUpPasswordeditText" />
+
+    <EditText
+        android:id="@+id/signUpPasswordeditText"
+        android:layout_width="345dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/rectangle"
+        android:ems="10"
+        android:hint="비밀번호를 입력해 주세요!"
+        android:inputType="textPassword"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpNameeditText" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="비밀번호 확인( Re-enter password )"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/signUpRepasswordeditText"
+        app:layout_constraintStart_toStartOf="@+id/signUpRepasswordeditText" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
