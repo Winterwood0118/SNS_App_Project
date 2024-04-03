@@ -13,11 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.data.User
 import kr.camp.sns.databinding.ActivitySignInBinding
+import kr.camp.sns.registry.UserRegistry
 import java.util.regex.Pattern
 
 class SignInActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivitySignInBinding.inflate(layoutInflater) }
+    val userRegistry = UserRegistry.getInstance()
 
     private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -37,14 +39,17 @@ class SignInActivity : AppCompatActivity() {
 
         // 로그인 버튼을 눌렀을 때의 작동
         binding.loginButton.setOnClickListener {
-            // 메인 페이지로 이동
-            val intent = Intent(this, MainActivity::class.java)
-            /*            val userName = intent.getSerializableExtra("userName") as User
-                        intent.putExtra("userName", userName.name)*/
-            intent.putExtra(IntentKey.LOGIN, true)
-            setResult(Activity.RESULT_OK, intent)
-            finish()
-            loginStart()
+            val id = binding.idEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+            val user = userRegistry.findUserByIdAndPassword(id, password)
+            if (user != null) {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra(IntentKey.LOGIN, true)
+                intent.putExtra(IntentKey.USER, user)
+                setResult(Activity.RESULT_OK, intent)
+                finish()
+                loginStart()
+            }
 
             // 애니메이션 작동하면서 메인액티비티로 이동
             /*            if(!isRegularId() && !isRegularPassword()) {
