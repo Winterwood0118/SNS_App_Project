@@ -24,6 +24,16 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var startForResult: ActivityResultLauncher<Intent>
 
+    private val userList by lazy {
+        mutableListOf(
+            binding.mainCustomUserItem1,
+            binding.mainCustomUserItem2,
+            binding.mainCustomUserItem3,
+            binding.mainCustomUserItem4,
+            binding.mainCustomUserItem5
+        )
+    }
+
     private val postList by lazy {
         mutableListOf(
             binding.mainPost1,
@@ -82,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                     user = result.data?.getSerializableExtra(IntentKey.USER) as User
                 }
             }
+
         binding.mainLoginImageView.setOnClickListener {
             if (isLogin) {
                 val intent = Intent(this, MyPageActivity::class.java)
@@ -90,6 +101,12 @@ class MainActivity : AppCompatActivity() {
             } else {
                 val intent = Intent(this, SignInActivity::class.java)
                 startForResult.launch(intent)
+            }
+        }
+        for (i in userList.indices){
+            userList[i].apply{
+                customNameTextView.text = defaultUser[i].name
+                customUserProfileImageView.setImageResource(defaultUser[i].profileDrawableId)
             }
         }
 
