@@ -27,7 +27,6 @@
         app:layout_constraintStart_toEndOf="@+id/detailLogoImageView"
         android:src="@drawable/arrow_down_icon"/>
 
-
     <ImageView
         android:id="@+id/detailTopBannerLikeIconImageView"
         android:layout_width="wrap_content"
@@ -284,6 +283,7 @@
         app:layout_constraintTop_toBottomOf="@id/detailCurrentContentLikeImageView"/>
 
     <TextView
+        android:id="@+id/detailCurrentContentDescriptionTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"

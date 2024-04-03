@@ -6,7 +6,7 @@
         <item name="colorOnPrimary">@color/black</item>
         <item name="colorSecondary">#E1E1E1</item>
 
-
+        <item name="android:textViewStyle">@style/UserInputInvalidationStyle</item>
 
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
