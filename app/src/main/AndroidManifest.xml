@@ -17,10 +17,14 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.MyPageActivity" />
+        <activity
+            android:name=".activity.MyPagePostingPopupActivity"
+            android:theme="@android:style/Theme.Dialog" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
