@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:src="@drawable/instgram_logo"
+        app:layout_constraintBottom_toTopOf="@+id/idEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/idEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="사용자의 이름"
+        style="@style/STYLE"
+        android:layout_marginTop="220dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        style="@style/STYLE"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/idEditText"/>
+
+    <android.widget.Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/login_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+
+    <TextView
+        android:id="@+id/facebookloginTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Facebook으로 로그인"
+        android:textColor="@color/blue"
+        android:textSize="17sp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginButton"/>
+
+    <TextView
+        android:id="@+id/signInTextView"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:text="가입하기"
+        android:textSize="17sp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/facebookloginTextView"/>
+
+    <TextView
+        android:id="@+id/notPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호를 다시 입렫해주세요"
+        android:textColor="#E53935"
+        app:layout_constraintStart_toStartOf="@id/passwordEditText"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
+        android:visibility="invisible"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
