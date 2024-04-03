@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
             binding.mainPost5
         )
     }
+
     private val defaultUser = arrayOf(
         User("default_user_id1", "test", "default_name1"),
         User("default_user_id2", "test", "default_name2"),
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         User("default_user_id4", "test", "default_name4"),
         User("default_user_id5", "test", "default_name5")
     )
+
     private val postImageId = arrayOf(
         R.drawable.golden_state_warriors,
         R.drawable.dog,
@@ -57,7 +59,9 @@ class MainActivity : AppCompatActivity() {
         R.drawable.stephen_curry,
         R.drawable.klay_thompson,
         R.drawable.kevin_durant,
-        R.drawable.lebron_james
+        R.drawable.lebron_james,
+        R.drawable.img_donut_glazeddonut,
+        R.drawable.img_test
     )
 
     private val postTextId by lazy {
@@ -103,8 +107,8 @@ class MainActivity : AppCompatActivity() {
                 startForResult.launch(intent)
             }
         }
-        for (i in userList.indices){
-            userList[i].apply{
+        for (i in userList.indices) {
+            userList[i].apply {
                 customNameTextView.text = defaultUser[i].name
                 customUserProfileImageView.setImageResource(defaultUser[i].profileDrawableId)
             }
@@ -134,6 +138,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 }
+                customPostProfileImageView.setImageResource(user.profileDrawableId)
                 customPostCountOfLikeTextView.text = countOfLike
                 customPostNameTextView.text = user.name
                 customPostMainTextView.text = postString
