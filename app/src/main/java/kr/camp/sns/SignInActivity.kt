@@ -2,6 +2,7 @@
 
 package kr.camp.sns
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -40,12 +41,15 @@ class SignInActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             // 메인 페이지로 이동
             val intent = Intent(this, MainActivity::class.java)
-            val userName = intent.getSerializableExtra("userName") as User
-            intent.putExtra("userName", userName.name)
-
+/*            val userName = intent.getSerializableExtra("userName") as User
+            intent.putExtra("userName", userName.name)*/
+            intent.putExtra("extra_login",true)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+            loginStart()
 
             // 애니메이션 작동하면서 메인액티비티로 이동
-            if(!isRegularId() && !isRegularPassword()) {
+/*            if(!isRegularId() && !isRegularPassword()) {
                 Toast.makeText(this, "아이디와 비밀번호를 입력해주세요", Toast.LENGTH_LONG).show()
             } else if (!isRegularId()) {
                 Toast.makeText(this, "영어와 숫자를 포함하여 8~20자리로 입력해야 합니다", Toast.LENGTH_LONG).show()
@@ -54,7 +58,7 @@ class SignInActivity : AppCompatActivity() {
             } else {
                 startActivity(intent)
                 loginStart()
-            }
+            }*/
         }
 
         // 가입하기 텍스트를 눌렀을 떄의 작동

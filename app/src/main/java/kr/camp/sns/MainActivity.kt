@@ -10,10 +10,8 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import kr.camp.sns.data.Posting
-import kr.camp.sns.data.User
+import kr.camp.sns.activity.MyPageActivity
 import kr.camp.sns.databinding.ActivityMainBinding
-import kr.camp.sns.registry.UserRegistry
 
 
 class MainActivity : AppCompatActivity() {
