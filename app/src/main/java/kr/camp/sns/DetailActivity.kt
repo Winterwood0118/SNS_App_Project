@@ -9,14 +9,17 @@ import android.text.style.StyleSpan
 import androidx.appcompat.app.AppCompatActivity
 import kr.camp.sns.activity.MyPageActivity
 import kr.camp.sns.activity.intent.IntentKey
+import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.data.Posting
 import kr.camp.sns.data.User
 import kr.camp.sns.databinding.ActivityDetailBinding
+
 class DetailActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityDetailBinding.inflate(layoutInflater) }
     private val descriptionMaxLineNum = 2
     private var isFolded = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -37,6 +40,10 @@ class DetailActivity : AppCompatActivity() {
                 }
             )
         } catch(e: Exception) {
+            val currentPosting: Posting = intent.getSerializableExtra(IntentKey.POST) as Posting
+            val currentUser: String = intent.getStringExtra(IntentKey.POSTING_USER_NAME)!!
+            initView(currentPosting, currentUser)
+        } catch (e: Exception) {
             finish()
             // 게시물 열람 불가
         }
@@ -90,7 +97,7 @@ class DetailActivity : AppCompatActivity() {
 
         binding.detailCurrentContentDescriptionTextView.run {
             setOnClickListener {
-                maxLines = if(isFolded) Integer.MAX_VALUE else descriptionMaxLineNum
+                maxLines = if (isFolded) Integer.MAX_VALUE else descriptionMaxLineNum
                 isFolded = !isFolded
             }
         }

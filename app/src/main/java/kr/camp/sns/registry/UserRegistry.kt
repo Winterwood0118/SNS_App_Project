@@ -3,6 +3,7 @@ package kr.camp.sns.registry
 import kr.camp.sns.data.User
 
 class UserRegistry {
+
     companion object {
         private var userRegistry: UserRegistry? = null
 
@@ -10,15 +11,20 @@ class UserRegistry {
             return userRegistry ?: UserRegistry().apply { userRegistry = this }
         }
     }
-    private val users = mutableListOf<User>()
+
+    private val _users = mutableListOf<User>()
+    
+    val users: List<User> = _users
 
     fun isUser(id: String): Boolean {
-        return users.any { it.id == id } // id 중복검사 함수
+        return _users.any { it.id == id } // id 중복검사 함수
     }
+
     fun addUser(user: User) {
-        users.add(user) // 회원가입 성공 시 유저 정보를 List에 추가
+        _users.add(user) // 회원가입 성공 시 유저 정보를 List에 추가
     }
+
     fun findUserByIdAndPassword(id: String, password: String): User? {
-        return users.find { it.id == id && it.password == password }  // 로그인 유효성 검사
+        return _users.find { it.id == id && it.password == password }  // 로그인 유효성 검사
     }
 }
