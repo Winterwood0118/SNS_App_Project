@@ -13,6 +13,7 @@ class UserRegistry {
     }
 
     private val _users = mutableListOf<User>()
+    
     val users: List<User> = _users
 
     fun isUser(id: String): Boolean {
