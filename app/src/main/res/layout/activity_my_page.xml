@@ -91,41 +91,41 @@
         app:layout_constraintTop_toBottomOf="@+id/mbtiTextView" />
 
     <include
-        android:id="@+id/postingCountLayout"
+        android:id="@+id/postingCounter"
         layout="@layout/layout_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
         app:layout_constraintBottom_toBottomOf="@+id/profileImageView"
-        app:layout_constraintEnd_toStartOf="@+id/followerCountLayout"
+        app:layout_constraintEnd_toStartOf="@+id/followerCounter"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/profileImageView"
         app:layout_constraintTop_toTopOf="@+id/profileImageView" />
 
     <include
-        android:id="@+id/followerCountLayout"
+        android:id="@+id/followerCounter"
         layout="@layout/layout_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/postingCountLayout"
-        app:layout_constraintEnd_toStartOf="@+id/followingCountLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/postingCounter"
+        app:layout_constraintEnd_toStartOf="@+id/followingCounter"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/postingCountLayout"
-        app:layout_constraintTop_toTopOf="@+id/postingCountLayout" />
+        app:layout_constraintStart_toEndOf="@+id/postingCounter"
+        app:layout_constraintTop_toTopOf="@+id/postingCounter" />
 
     <include
-        android:id="@+id/followingCountLayout"
+        android:id="@+id/followingCounter"
         layout="@layout/layout_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/followerCountLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/followerCounter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/followerCountLayout"
-        app:layout_constraintTop_toTopOf="@+id/followerCountLayout" />
+        app:layout_constraintStart_toEndOf="@+id/followerCounter"
+        app:layout_constraintTop_toTopOf="@+id/followerCounter" />
 
     <include
         android:id="@+id/nameEditButton"
