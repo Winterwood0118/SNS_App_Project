@@ -42,7 +42,9 @@ class SignUpActivity : AppCompatActivity() {
         binding.signUpIdcheckButton.setOnClickListener {
             val userRegistry = UserRegistry.getInstance()
 
-            if (userRegistry.isUser(id.toString())) {
+            if (id.isBlank()) {
+                Toast.makeText(this, "아이디를 입력해 주세요", Toast.LENGTH_SHORT).show()
+            } else if (userRegistry.isUser(id.toString())) {
                 Toast.makeText(this, "이미 존재하는 아이디 입니다", Toast.LENGTH_SHORT).show()
             } else {
                 idCheck = 2
