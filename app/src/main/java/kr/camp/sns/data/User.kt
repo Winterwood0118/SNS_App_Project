@@ -1,5 +1,6 @@
 package kr.camp.sns.data
 
+import kr.camp.sns.R
 import java.io.Serializable
 
 data class User(
@@ -8,7 +9,7 @@ data class User(
     val name: String
 ) : Serializable {
 
-    var profileDrawableId = -1
+    var profileDrawableId = R.drawable.stephen_curry
         private set
 
     var mbti = "ENFP"

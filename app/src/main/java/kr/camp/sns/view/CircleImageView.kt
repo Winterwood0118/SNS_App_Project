@@ -3,7 +3,6 @@ package kr.camp.sns.view
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
-import android.util.Log
 import android.view.Gravity
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -12,6 +11,8 @@ import kr.camp.sns.R
 import kotlin.math.min
 
 class CircleImageView : FrameLayout {
+
+    private lateinit var imageView: ImageView
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
 
@@ -71,7 +72,7 @@ class CircleImageView : FrameLayout {
             radius = imageBorderSize / 2 + 1f
         }
 
-        val imageView = ImageView(context).apply {
+        imageView = ImageView(context).apply {
             layoutParams = imageLayoutParams
             if(imageResourceId != -1) setImageResource(imageResourceId)
             scaleType = ImageView.ScaleType.CENTER_CROP
@@ -91,5 +92,9 @@ class CircleImageView : FrameLayout {
         attrs,
         defStyleAttr
     )
+
+    fun setImageResource(resId: Int) {
+        imageView.setImageResource(resId)
+    }
 }
 

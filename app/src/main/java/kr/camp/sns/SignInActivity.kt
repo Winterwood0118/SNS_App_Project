@@ -1,3 +1,4 @@
+@file:Suppress("DEPRECATION")
 
 package kr.camp.sns
 
@@ -7,67 +8,60 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.data.User
 import kr.camp.sns.databinding.ActivitySignInBinding
-import kr.camp.sns.intent.IntentKey
-import kr.camp.sns.registry.UserRegistry
 import java.util.regex.Pattern
 
-@Suppress("DEPRECATION")
 class SignInActivity : AppCompatActivity() {
+
     private val binding by lazy { ActivitySignInBinding.inflate(layoutInflater) }
 
-    var resultLauncher =
+    private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
-                val user = it.data?.getSerializableExtra(IntentKey.USER) as User
-                val id = user.id
-                val password = user.password
+                val intent = it.data
+                val user = intent?.getSerializableExtra(IntentKey.USER) as? User
+                val id = user?.id ?: ""                // 아이디 수신 혹은 ""
+                val password = user?.password ?: ""    // 비밀번호 수신 혹은 ""
                 binding.idEditText.setText(id)
                 binding.passwordEditText.setText(password)
             }
         }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val userRegistry = UserRegistry.getInstance()
-        // 가상의 임시 데이터
-    /*    val default = arrayOf(
-            User("ejiwn345", "rnjen34%%", "test1")
-        ) */
-
         // 로그인 버튼을 눌렀을 때의 작동
         binding.loginButton.setOnClickListener {
-            val inputId = binding.idEditText.text.toString()
-            val inputPassword = binding.passwordEditText.text.toString()
-            // 실제데이터
-            val user = userRegistry.findUserByIdAndPassword(inputId, inputPassword)
-            // val user = default.find { it.id == inputId && it.password == inputPassword }
+            // 메인 페이지로 이동
+            val intent = Intent(this, MainActivity::class.java)
+            /*            val userName = intent.getSerializableExtra("userName") as User
+                        intent.putExtra("userName", userName.name)*/
+            intent.putExtra(IntentKey.LOGIN, true)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+            loginStart()
 
-            when {
-                user == null -> toast("틀림")
-                !isRegularId() -> toast("아이디의 조합이 틀렸습니다")
-                !isRegularPassword() -> toast("비밀번호의 조합이 틀렸습니다")
-                else -> {
-                    // 메인으로 넘김
-                    val intent = Intent(this@SignInActivity, MainActivity::class.java)
-                    intent.putExtra(IntentKey.USER, user) // 로그인 성공한 데이터가 모두 넘겨짐
-                    intent.putExtra(IntentKey.LOGIN, true) // 로그인이 맞으면 넘김
-                    setResult(Activity.RESULT_OK, intent) // activity의 결과가 맞으면
-                    finish()
-                    loginStart() // 애니메이션 시작
-                }
-            }
-
+            // 애니메이션 작동하면서 메인액티비티로 이동
+            /*            if(!isRegularId() && !isRegularPassword()) {
+                            Toast.makeText(this, "아이디와 비밀번호를 입력해주세요", Toast.LENGTH_LONG).show()
+                        } else if (!isRegularId()) {
+                            Toast.makeText(this, "영어와 숫자를 포함하여 8~20자리로 입력해야 합니다", Toast.LENGTH_LONG).show()
+                        } else if(!isRegularPassword()) {
+                            Toast.makeText(this, "영어와 숫자, 특수문자를 조합하여 8~20자리로 입력해야 합니다", Toast.LENGTH_LONG).show()
+                        } else {
+                            startActivity(intent)
+                            loginStart()
+                        }*/
         }
 
         // 가입하기 텍스트를 눌렀을 떄의 작동
         binding.signInTextView.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
+            // val intent = Intent(this, SignUpActivity::class.java)
             resultLauncher.launch(intent)
         }
 
@@ -101,13 +95,12 @@ class SignInActivity : AppCompatActivity() {
             }
 
         })
-
     }
 
     // overridePendingTransition (시작할때 애니메이션, 끝날때 애니메이션)
     // overridePendingTransition을 함수로 만들어 밖으로 뺌
     fun loginStart() {
-        overridePendingTransition(R.anim.slide_right_start, R.anim.slide_right_end)
+        overridePendingTransition(R.anim.slide_right_end, R.anim.slide_left_end)
     }
 
 
@@ -137,7 +130,8 @@ class SignInActivity : AppCompatActivity() {
         val passwordEnglish = binding.passwordEditText.text.toString().trim() // 띄어쓰기 삭제
         val notPasswordTextView = binding.notPassword
         // 영어, 특수문자, 8~20자리
-        val passwordPattern = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&.])[A-Za-z[0-9]$@$!%*#?&.]{8,20}$"
+        val passwordPattern =
+            "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&.])[A-Za-z[0-9]$@$!%*#?&.]{8,20}$"
         val pwdPattern = Pattern.matches(passwordPattern, passwordEnglish)
         val passwordEdit = binding.passwordEditText
         if (pwdPattern) {
@@ -154,8 +148,4 @@ class SignInActivity : AppCompatActivity() {
             return false
         }
     }
-    fun toast(message : String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-    }
-
 }

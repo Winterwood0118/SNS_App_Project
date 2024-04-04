@@ -25,7 +25,7 @@
 
 공지훈: MyPageActivity 개발
 
-정중호: SignInActivity 개발
+정준호: SignInActivity 개발
 
 박민수: SignUpActivity 개발
 
@@ -36,4 +36,4 @@
 
 1. Constraint Layout
 2. ViewBinding
-3. SingleTone
+3. Singleton

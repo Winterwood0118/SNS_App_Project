@@ -59,15 +59,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
 
-                    <include layout="@layout/custom_user_item" />
+                    <include
+                        android:id="@+id/mainCustomUserItem1"
+                        layout="@layout/custom_user_item" />
 
-                    <include layout="@layout/custom_user_item" />
+                    <include
+                        android:id="@+id/mainCustomUserItem2"
+                        layout="@layout/custom_user_item" />
 
-                    <include layout="@layout/custom_user_item" />
+                    <include
+                        android:id="@+id/mainCustomUserItem3"
+                        layout="@layout/custom_user_item" />
 
-                    <include layout="@layout/custom_user_item" />
+                    <include
+                        android:id="@+id/mainCustomUserItem4"
+                        layout="@layout/custom_user_item" />
 
-                    <include layout="@layout/custom_user_item" />
+                    <include
+                        android:id="@+id/mainCustomUserItem5"
+                        layout="@layout/custom_user_item" />
 
                 </LinearLayout>
 
