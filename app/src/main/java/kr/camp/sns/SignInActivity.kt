@@ -19,11 +19,6 @@ import java.util.regex.Pattern
 @Suppress("DEPRECATION")
 class SignInActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySignInBinding.inflate(layoutInflater) }
-//    private val defaultUser = arrayOf(
-//        User("differ445", "AKrwjrdjf45#", "test1"),
-//        User("aevde456", "wofj4886$$", "test2"),
-//        User("ewfr735", "fwr4865#$", "test3")
-//    )
 
     var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -39,35 +34,40 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val userRegistry = UserRegistry.getInstance() // 싱글톤 구현 방법
+        val userRegistry = UserRegistry.getInstance()
+        // 가상의 임시 데이터
+    /*    val default = arrayOf(
+            User("ejiwn345", "rnjen34%%", "test1")
+        ) */
 
         // 로그인 버튼을 눌렀을 때의 작동
         binding.loginButton.setOnClickListener {
             val inputId = binding.idEditText.text.toString()
             val inputPassword = binding.passwordEditText.text.toString()
+            // 실제데이터
             val user = userRegistry.findUserByIdAndPassword(inputId, inputPassword)
+            // val user = default.find { it.id == inputId && it.password == inputPassword }
 
-            if (user == null) {
-                toast("잘못된 아이디와 비밀번호 입니다")
-            } else if (!isRegularId()) {
-                toast("아이디의 조합이 틀렸습니다")
-            } else if (!isRegularPassword()) {
-                toast("비밀번호의 조합이 틀렸습니다")
-            } else if (human.toString()) {
-                // 메인으로 넘김
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra(IntentKey.USER, user) // 로그인 성공한 데이터가 모두 넘겅감
-                intent.putExtra(IntentKey.LOGIN, true) // 로그인이 맞으면 넘김
-                setResult(Activity.RESULT_OK, intent) // intent의 결과가 맞으면 이동
-                finish() // 꺼짐
-                loginStart() // 애니메이션 시작
+            when {
+                user == null -> toast("틀림")
+                !isRegularId() -> toast("아이디의 조합이 틀렸습니다")
+                !isRegularPassword() -> toast("비밀번호의 조합이 틀렸습니다")
+                else -> {
+                    // 메인으로 넘김
+                    val intent = Intent(this@SignInActivity, MainActivity::class.java)
+                    intent.putExtra(IntentKey.USER, user) // 로그인 성공한 데이터가 모두 넘겨짐
+                    intent.putExtra(IntentKey.LOGIN, true) // 로그인이 맞으면 넘김
+                    setResult(Activity.RESULT_OK, intent) // activity의 결과가 맞으면
+                    finish()
+                    loginStart() // 애니메이션 시작
+                }
             }
 
         }
 
         // 가입하기 텍스트를 눌렀을 떄의 작동
         binding.signInTextView.setOnClickListener {
-            // val intent = Intent(this, SignUpActivity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java)
             resultLauncher.launch(intent)
         }
 

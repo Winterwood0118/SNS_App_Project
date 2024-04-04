@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.camp.sns.data.User
 import kr.camp.sns.databinding.ActivitySignUpBinding
+import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.registry.UserRegistry
 import java.util.regex.Pattern
 
@@ -41,7 +42,7 @@ class SignUpActivity : AppCompatActivity() {
                 binding.signUpNameeditText.text.toString()
             )
 
-                if (userRegistry.isUser(binding.signUpIdeditText.text.toString()) == true) {
+                if (userRegistry.isUser(binding.signUpIdeditText.text.toString())) {
                     Toast.makeText(this, "이미 존재하는 아이디 입니다", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this, "사용 가능한 아이디 입니다", Toast.LENGTH_SHORT).show()
