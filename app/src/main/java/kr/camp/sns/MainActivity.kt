@@ -45,9 +45,11 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, MyPageActivity::class.java)
                 intent.putExtra(IntentKey.USER, user)
                 startActivity(intent)
+                changeAnimationRightToLeft()
             } else {
                 val intent = Intent(this, SignInActivity::class.java)
                 startForResult.launch(intent)
+                changeAnimationRightToLeft()
             }
         }
         for (i in userList.indices) {
@@ -57,8 +59,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        for (i in postList.indices) {
-            postList[i].apply {
+        for (i in postList) {
+            i.apply {
                 val user = userRegistry.users.random()
                 val post = user.postings.random()
                 val countOfLike = "${post.likeCount} likes"
@@ -94,21 +96,23 @@ class MainActivity : AppCompatActivity() {
                             putExtra(IntentKey.POST, post)
                         }
                         startActivity(intent)
+                        changeAnimationBottomToTop()
                     }
                 }
             }
         }
     }
-    private val dialogMessage by lazy{
+
+    private val dialogMessage by lazy {
         getString(R.string.text_dialog)
     }
 
-    private fun showDialog(message: String){
+    private fun showDialog(message: String) {
         val dialogBuilder = AlertDialog.Builder(this)
-        dialogBuilder.apply{
+        dialogBuilder.apply {
             setMessage(message)
             setCancelable(false)
-            setPositiveButton("확인"){ a, b ->
+            setPositiveButton("확인") { a, b ->
                 a.dismiss()
             }
         }
@@ -117,7 +121,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun makeRandomUserPost(){
+    private fun makeRandomUserPost() {
         //디폴트 유저, 랜덤 포스트 생성
         repeat(50) {
             randomPosting.add(Posting(postImageId.random(), getString(postTextId.random())))
@@ -183,4 +187,11 @@ class MainActivity : AppCompatActivity() {
 
     private val randomPosting = mutableListOf<Posting>()
 
+    private fun changeAnimationRightToLeft() {
+        overridePendingTransition(R.anim.slide_left_end, R.anim.slide_right_end)
+    }
+
+    private fun changeAnimationBottomToTop() {
+        overridePendingTransition(R.anim.slide_top_end, R.anim.no_slide)
+    }
 }
