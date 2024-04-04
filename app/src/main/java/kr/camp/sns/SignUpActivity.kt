@@ -47,6 +47,7 @@ class SignUpActivity : AppCompatActivity() {
             } else {
                 idCheck = 2
                 binding.signUpIdcheckButton.isEnabled = false
+                binding.signUpIdeditText.isEnabled = false
                 binding.signUpIdcheckButton.text = "확인완료"
                 binding.signUpIdcheckButton.background =
                     ContextCompat.getDrawable(this, R.drawable.btn_round2)
