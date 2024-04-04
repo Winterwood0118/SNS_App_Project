@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kr.camp.sns.R
@@ -51,6 +52,12 @@ class MyPageActivity : AppCompatActivity() {
     private lateinit var user: User
     private var isLogin = false
 
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            finishWithAnimation()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -84,6 +91,7 @@ class MyPageActivity : AppCompatActivity() {
                 showPostingPopup(posting)
             }
         }
+        onBackPressedDispatcher.addCallback(this@MyPageActivity, backPressedCallback)
     }
 
     private fun initEditButton(button: Button, title: String, textView: TextView) = with(button) {
@@ -125,6 +133,15 @@ class MyPageActivity : AppCompatActivity() {
     }
 
     fun onMyPageBackspaceButtonClick(view: View) {
+        finishWithAnimation()
+    }
+
+    private fun finishWithAnimation() {
         finish()
+        showAnimation()
+    }
+
+    private fun showAnimation() {
+        overridePendingTransition(R.anim.slide_left_end, R.anim.slide_right_end)
     }
 }
