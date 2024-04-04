@@ -1,8 +1,14 @@
 package kr.camp.sns
-
+import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
-import android.view.View
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.StyleSpan
 import androidx.appcompat.app.AppCompatActivity
+import kr.camp.sns.activity.MyPageActivity
+import kr.camp.sns.activity.intent.IntentKey
 import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.data.Posting
 import kr.camp.sns.data.User
@@ -19,6 +25,21 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         try {
+//            val currentPosting: Posting = intent
+//                .getSerializableExtra("extra_post") as Posting
+//            val currentUser: User = intent
+//                .getSerializableExtra("extra_posting_user_name")  as User
+//            initView(currentPosting, currentUser)
+            initView(
+                Posting(
+                    R.drawable.dog,
+                    resources.getString(R.string.text_test)
+                ),
+                User("abcd", "1234", "tom").apply {
+                    setProfileDrawableId(R.drawable.golden_state_warriors)
+                }
+            )
+        } catch(e: Exception) {
             val currentPosting: Posting = intent.getSerializableExtra(IntentKey.POST) as Posting
             val currentUser: String = intent.getStringExtra(IntentKey.POSTING_USER_NAME)!!
             initView(currentPosting, currentUser)
@@ -30,19 +51,47 @@ class DetailActivity : AppCompatActivity() {
 
     private fun initView(
         currentPosting: Posting,
-        currentUserName: String
+        currentUser: User
     ) {
-        binding.detailCurrentUserProfileTitleTextView.text = currentUserName
+        val contentDescriptionText = "${currentUser.name} ${currentPosting.description}"
+        val span = SpannableStringBuilder(contentDescriptionText).apply {
+            setSpan(
+                StyleSpan(Typeface.BOLD),
+                0,
+                currentUser.name.length,
+                Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+            )
+        }
+
+        binding.detailCurrentUserProfileTitleTextView.text = currentUser.name
         binding.detailCurrentContentImageView.setImageResource(currentPosting.imageDrawableId)
-        binding.detailCurrentContentDescriptionTextView.text = currentPosting.description
-        binding.detailCurrentContentNumLikeTextView.text = "${currentPosting.likeCount} 좋아요"
+        binding.detailCurrentContentDescriptionTextView.text = span
+        binding.detailCurrentUserProfileImageView.setImageResource(currentUser.profileDrawableId)
+        setNumLikeText(currentPosting.likeCount)
+
+        initViewClickListener(currentPosting, currentUser)
+    }
+
+    private fun initViewClickListener(
+        currentPosting: Posting,
+        currentUser: User
+    ) {
+        binding.detailCurrentUserProfileImageView.run {
+            setOnClickListener {
+                startActivity(
+                    Intent(this@DetailActivity, MyPageActivity::class.java)
+                        .apply { putExtra(IntentKey.USER, currentUser) }
+                )
+            }
+        }
 
         binding.detailCurrentContentLikeImageView.run {
             setOnClickListener {
-                currentPosting.switchLike(currentUserName)
-                if (currentPosting.isLiked(currentUserName)) {
+                currentPosting.switchLike(currentUser.name)
+                if(currentPosting.isLiked(currentUser.name)) {
                     setImageResource(R.drawable.like_heart_icon)
-                } else setImageResource(R.drawable.like_icon)
+                }else setImageResource(R.drawable.like_icon)
+                setNumLikeText(currentPosting.likeCount)
             }
         }
 
@@ -52,5 +101,9 @@ class DetailActivity : AppCompatActivity() {
                 isFolded = !isFolded
             }
         }
+    }
+
+    private fun setNumLikeText(count: Int) {
+        binding.detailCurrentContentNumLikeTextView.text = "$count 좋아요"
     }
 }
