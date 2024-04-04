@@ -28,6 +28,7 @@ class SignUpActivity : AppCompatActivity() {
             insets
         }
 
+
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val id = binding.signUpIdeditText.text
@@ -35,14 +36,21 @@ class SignUpActivity : AppCompatActivity() {
         val repassword = binding.signUpRepasswordeditText.text
         val name = binding.signUpNameeditText.text
         var idCheck = false
+        val idPattern = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z[0-9]]{7,10}$"
+        val passwordPattern =
+            "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&.])[A-Za-z[0-9]$@$!%*#?&.]{8,20}$"
+
 
 
         binding.signUpIdcheckButton.setOnClickListener {
+            val pattern = Pattern.matches(idPattern, id.toString().trim())
 
             if (id.isBlank()) {
                 Toast.makeText(this, "아이디를 입력해 주세요", Toast.LENGTH_SHORT).show()
             } else if (userRegistry.isUser(id.toString())) {
                 Toast.makeText(this, "이미 존재하는 아이디 입니다", Toast.LENGTH_SHORT).show()
+            } else if (!pattern) {
+                Toast.makeText(this, "올바른 아이디 형식이 아닙니다", Toast.LENGTH_SHORT).show()
             } else {
                 idCheck = true
                 binding.signUpIdcheckButton.isEnabled = false
@@ -56,6 +64,7 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.signUpSignupButton.setOnClickListener {
             val user = User(id.toString(), password.toString(), name.toString())
+            val pwPattern = Pattern.matches(passwordPattern, password.toString().trim())
 
             if (id.isBlank()) {
                 Toast.makeText(this, "아이디를 입력해 주세요", Toast.LENGTH_SHORT).show()
@@ -63,6 +72,8 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "이름을 입력해 주세요", Toast.LENGTH_SHORT).show()
             } else if (password.isBlank()) {
                 Toast.makeText(this, "비밀번호를 입력해 주세요", Toast.LENGTH_SHORT).show()
+            } else if (!pwPattern) {
+                Toast.makeText(this, "올바른 비밀번호 형식이 아닙니다", Toast.LENGTH_SHORT).show()
             } else if (repassword.isBlank()) {
                 Toast.makeText(this, "비밀번호를 한번 더 입력해 주세요", Toast.LENGTH_SHORT).show()
             } else if (password.toString()
@@ -81,5 +92,7 @@ class SignUpActivity : AppCompatActivity() {
 
             }
         }
+
     }
+
 }
