@@ -49,13 +49,13 @@ class MyPageActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMyPageBinding.inflate(layoutInflater) }
 
     private lateinit var user: User
-    private var isOwnUser = false
+    private var isLogin = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         user = intent.getSerializableExtra(IntentKey.USER) as? User ?: emptyUser
-        isOwnUser = intent.getBooleanExtra(IntentKey.CHECK_OWN_USER, false)
+        isLogin = intent.getBooleanExtra(IntentKey.LOGIN, false)
 
         setContentView(binding.root)
         init()
@@ -87,7 +87,7 @@ class MyPageActivity : AppCompatActivity() {
     }
 
     private fun initEditButton(button: Button, title: String, textView: TextView) = with(button) {
-        if (isOwnUser) {
+        if (isLogin) {
             text = title
             setOnClickListener { showInputDialog(title, textView) }
         } else {
