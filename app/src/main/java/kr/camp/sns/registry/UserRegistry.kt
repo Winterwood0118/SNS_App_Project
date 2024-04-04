@@ -1,5 +1,7 @@
 package kr.camp.sns.registry
 
+import kr.camp.sns.R
+import kr.camp.sns.data.Posting
 import kr.camp.sns.data.User
 
 class UserRegistry {
@@ -12,7 +14,17 @@ class UserRegistry {
         }
     }
 
-    private val _users = mutableListOf<User>()
+    private val _users = mutableListOf<User>(
+        User("rhdwlgns0725", "qlalfqjsgh1*", "공지훈").apply {
+            setProfileDrawableId(R.drawable.stephen_curry)
+            setMBTI("ESTJ")
+            setDescription("항상 열심히!")
+            addPostings(
+                Posting(R.drawable.golden_state_warriors, "골든스테이트 워리어스 우승"),
+                Posting(R.drawable.lebron_james, "르브론 제임스입니다!")
+            )
+        }
+    )
     
     val users: List<User> = _users
 
