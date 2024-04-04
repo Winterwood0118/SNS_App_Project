@@ -43,7 +43,10 @@ class MainActivity : AppCompatActivity() {
         binding.mainLoginImageView.setOnClickListener {
             if (isLogin) {
                 val intent = Intent(this, MyPageActivity::class.java)
-                intent.putExtra(IntentKey.USER, user)
+                intent.apply {
+                    putExtra(IntentKey.USER, user)
+                    putExtra(IntentKey.LOGIN, true)
+                }
                 startActivity(intent)
                 changeAnimationRightToLeft()
             } else {
@@ -92,6 +95,7 @@ class MainActivity : AppCompatActivity() {
                     setOnClickListener {
                         val intent = Intent(this@MainActivity, DetailActivity::class.java)
                         intent.apply {
+                            putExtra(IntentKey.LOGIN, false)
                             putExtra(IntentKey.USER, user)
                             putExtra(IntentKey.POST, post)
                         }
@@ -112,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         dialogBuilder.apply {
             setMessage(message)
             setCancelable(false)
-            setPositiveButton("확인") { a, b ->
+            setPositiveButton(getString(R.string.text_ok)) { a, _ ->
                 a.dismiss()
             }
         }
@@ -172,7 +176,6 @@ class MainActivity : AppCompatActivity() {
         R.drawable.kevin_durant,
         R.drawable.lebron_james,
         R.drawable.img_donut_glazeddonut,
-        R.drawable.img_test
     )
 
     private val postTextId by lazy {
@@ -188,7 +191,7 @@ class MainActivity : AppCompatActivity() {
     private val randomPosting = mutableListOf<Posting>()
 
     private fun changeAnimationRightToLeft() {
-        overridePendingTransition(R.anim.slide_left_end, R.anim.slide_right_end)
+        overridePendingTransition(R.anim.slide_right_start, R.anim.slide_right_end)
     }
 
     private fun changeAnimationBottomToTop() {

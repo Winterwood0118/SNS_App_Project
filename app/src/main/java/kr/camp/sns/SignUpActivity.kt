@@ -2,10 +2,7 @@ package kr.camp.sns
 
 import android.app.Activity
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +13,6 @@ import kr.camp.sns.data.User
 import kr.camp.sns.databinding.ActivitySignUpBinding
 import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.registry.UserRegistry
-import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
     private val userRegistry = UserRegistry.getInstance()
@@ -82,7 +78,6 @@ class SignUpActivity : AppCompatActivity() {
                 userRegistry.addUser(user)
                 setResult(Activity.RESULT_OK, intent)
                 finish()
-
 
             }
         }

@@ -142,6 +142,6 @@ class MyPageActivity : AppCompatActivity() {
     }
 
     private fun showAnimation() {
-        overridePendingTransition(R.anim.slide_left_end, R.anim.slide_right_end)
+        overridePendingTransition(R.anim.slide_right_start, R.anim.slide_right_end)
     }
 }
