@@ -8,6 +8,7 @@ import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kr.camp.sns.activity.MyPageActivity
 import kr.camp.sns.data.Posting
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        showDialog(dialogMessage)
         makeRandomUserPost()
 
         startForResult =
@@ -97,6 +99,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    private val dialogMessage by lazy{
+        getString(R.string.text_dialog)
+    }
+
+    private fun showDialog(message: String){
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.apply{
+            setMessage(message)
+            setCancelable(false)
+            setPositiveButton("확인"){ a, b ->
+                a.dismiss()
+            }
+        }
+        val dialog = dialogBuilder.create()
+        dialog.show()
+    }
+
+
     private fun makeRandomUserPost(){
         //디폴트 유저, 랜덤 포스트 생성
         repeat(50) {
