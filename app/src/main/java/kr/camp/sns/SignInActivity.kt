@@ -107,7 +107,7 @@ class SignInActivity : AppCompatActivity() {
     // overridePendingTransition (시작할때 애니메이션, 끝날때 애니메이션)
     // overridePendingTransition을 함수로 만들어 밖으로 뺌
     fun loginStart() {
-        overridePendingTransition(R.anim.none, R.anim.slide_right_end)
+        overridePendingTransition(R.anim.slide_right_start, R.anim.slide_right_end)
     }
 
 

@@ -71,7 +71,7 @@ class SignUpActivity : AppCompatActivity() {
         } else if (binding.signUpPasswordeditText.text.toString()
             != binding.signUpRepasswordeditText.text.toString()) {
             Toast.makeText(this, "비밀번호가 다릅니다", Toast.LENGTH_SHORT).show()
-        } else if (userRegistry.isUser(binding.signUpIdeditText.text.toString()) == true) {
+        } else if (userRegistry.isUser(binding.signUpIdeditText.text.toString())) {
             Toast.makeText(this, "아이디 중복확인을 해주세요", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
