@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--무조건 anim 파일 안에 넣어야 한다. 다른 파일 안에 넣으면 에러 발생-->
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <translate
-        android:duration="800"
+        android:duration="500"
         android:fromXDelta="0%"
-        android:fromYDelta="0%"
-        android:toXDelta="-100%"
-        android:toYDelta="0%" />
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:toXDelta="-100%" />
+    <!--처음에 느리다가 점점 빠르게 이동-->
+    <!---100을 사용한 이유는 왼쪽으로 이동시키기위해-->
 </set>

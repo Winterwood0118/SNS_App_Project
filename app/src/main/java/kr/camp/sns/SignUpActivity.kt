@@ -78,7 +78,6 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent().apply {
                     putExtra(IntentKey.USER, user)
-
                 }
                 userRegistry.addUser(user)
                 setResult(Activity.RESULT_OK, intent)
