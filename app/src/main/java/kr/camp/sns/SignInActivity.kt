@@ -61,7 +61,7 @@ class SignInActivity : AppCompatActivity() {
 
         // 가입하기 텍스트를 눌렀을 떄의 작동
         binding.signInTextView.setOnClickListener {
-            // val intent = Intent(this, SignUpActivity::class.java)
+             val intent = Intent(this, SignUpActivity::class.java)
             resultLauncher.launch(intent)
         }
 
