@@ -8,7 +8,6 @@ import android.text.Spanned
 import android.text.style.StyleSpan
 import androidx.appcompat.app.AppCompatActivity
 import kr.camp.sns.activity.MyPageActivity
-import kr.camp.sns.activity.intent.IntentKey
 import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.data.Posting
 import kr.camp.sns.data.User
@@ -25,24 +24,24 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         try {
-//            val currentPosting: Posting = intent
-//                .getSerializableExtra("extra_post") as Posting
-//            val currentUser: User = intent
-//                .getSerializableExtra("extra_posting_user_name")  as User
-//            initView(currentPosting, currentUser)
-            initView(
-                Posting(
-                    R.drawable.dog,
-                    resources.getString(R.string.text_test)
-                ),
-                User("abcd", "1234", "tom").apply {
-                    setProfileDrawableId(R.drawable.golden_state_warriors)
-                }
-            )
+            val currentPosting: Posting = intent
+                .getSerializableExtra(IntentKey.POST) as Posting
+            val currentUser: User = intent
+                .getSerializableExtra(IntentKey.USER)  as User
+            initView(currentPosting, currentUser)
+//            initView(
+//                Posting(
+//                    R.drawable.dog,
+//                    resources.getString(R.string.text_test1)
+//                ),
+//                User("abcd", "1234", "tom").apply {
+//                    setProfileDrawableId(R.drawable.golden_state_warriors)
+//                }
+//            )
         } catch(e: Exception) {
             val currentPosting: Posting = intent.getSerializableExtra(IntentKey.POST) as Posting
             val currentUser: String = intent.getStringExtra(IntentKey.POSTING_USER_NAME)!!
-            initView(currentPosting, currentUser)
+            initView(currentPosting, User(id = "", password = "", currentUser))
         } catch (e: Exception) {
             finish()
             // 게시물 열람 불가
