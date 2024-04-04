@@ -19,6 +19,7 @@ import java.util.regex.Pattern
 @Suppress("DEPRECATION")
 class SignInActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySignInBinding.inflate(layoutInflater) }
+    val userRegistry = UserRegistry.getInstance()
 
     var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -68,6 +69,7 @@ class SignInActivity : AppCompatActivity() {
         // 가입하기 텍스트를 눌렀을 떄의 작동
         binding.signInTextView.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
+
             resultLauncher.launch(intent)
         }
 

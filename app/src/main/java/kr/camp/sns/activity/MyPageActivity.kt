@@ -3,8 +3,10 @@ package kr.camp.sns.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kr.camp.sns.R
@@ -13,6 +15,7 @@ import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.data.Posting
 import kr.camp.sns.data.User
 import kr.camp.sns.databinding.ActivityMyPageBinding
+import kr.camp.sns.databinding.LayoutCounterBinding
 
 class MyPageActivity : AppCompatActivity() {
 
@@ -47,11 +50,19 @@ class MyPageActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMyPageBinding.inflate(layoutInflater) }
 
     private lateinit var user: User
+    private var isLogin = false
+
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            finishWithAnimation()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         user = intent.getSerializableExtra(IntentKey.USER) as? User ?: emptyUser
+        isLogin = intent.getBooleanExtra(IntentKey.LOGIN, false)
 
         setContentView(binding.root)
         init()
@@ -63,30 +74,15 @@ class MyPageActivity : AppCompatActivity() {
         mbtiTextView.text = user.mbti
         descriptionTextView.text = user.description
         profileImageView.setImageResource(user.profileDrawableId)
-        nameEditButton.editButton.apply {
-            text = NAME_EDIT
-            setOnClickListener { showInputDialog(NAME_EDIT, nameTextView) }
-        }
-        mbtiEditButton.editButton.apply {
-            text = MBTI_EDIT
-            setOnClickListener { showInputDialog(MBTI_EDIT, mbtiTextView) }
-        }
-        descriptionEditButton.editButton.apply {
-            text = DESCRIPTION_EDIT
-            setOnClickListener { showInputDialog(DESCRIPTION_EDIT, descriptionTextView) }
-        }
-        postingCountLayout.apply {
-            countTextView.text = user.postings.size.toString()
-            titleTextView.text = POSTING
-        }
-        followerCountLayout.apply {
-            countTextView.text = getFollow().toString()
-            titleTextView.text = FOLLOWER
-        }
-        followingCountLayout.apply {
-            countTextView.text = getFollow().toString()
-            titleTextView.text = FOLLOWING
-        }
+
+        initEditButton(nameEditButton.editButton, NAME_EDIT, nameTextView)
+        initEditButton(mbtiEditButton.editButton, MBTI_EDIT, mbtiTextView)
+        initEditButton(descriptionEditButton.editButton, DESCRIPTION_EDIT, descriptionTextView)
+
+        initCounter(postingCounter, user.postings.size, POSTING)
+        initCounter(followerCounter, getFollow(), FOLLOWER)
+        initCounter(followingCounter, getFollow(), FOLLOWING)
+
         postingListView.apply {
             val myPagePostingAdapter = MyPagePostingAdapter(this@MyPageActivity, user.postings)
             adapter = myPagePostingAdapter
@@ -95,6 +91,21 @@ class MyPageActivity : AppCompatActivity() {
                 showPostingPopup(posting)
             }
         }
+        onBackPressedDispatcher.addCallback(this@MyPageActivity, backPressedCallback)
+    }
+
+    private fun initEditButton(button: Button, title: String, textView: TextView) = with(button) {
+        if (isLogin) {
+            text = title
+            setOnClickListener { showInputDialog(title, textView) }
+        } else {
+            visibility = View.GONE
+        }
+    }
+
+    private fun initCounter(layoutCounter: LayoutCounterBinding, count: Int, title: String) = with(layoutCounter) {
+        countTextView.text = count.toString()
+        titleTextView.text = title
     }
 
     private fun showPostingPopup(posting: Posting) {
@@ -102,10 +113,6 @@ class MyPageActivity : AppCompatActivity() {
             putExtra(IntentKey.POSTING, posting)
         }
         startActivity(intent)
-    }
-
-    fun onMyPageBackspaceButtonClick(view: View) {
-        finish()
     }
 
     private fun showInputDialog(type: String, textView: TextView) {
@@ -123,5 +130,18 @@ class MyPageActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
         }.show()
+    }
+
+    fun onMyPageBackspaceButtonClick(view: View) {
+        finishWithAnimation()
+    }
+
+    private fun finishWithAnimation() {
+        finish()
+        showAnimation()
+    }
+
+    private fun showAnimation() {
+        overridePendingTransition(R.anim.slide_left_end, R.anim.slide_right_end)
     }
 }

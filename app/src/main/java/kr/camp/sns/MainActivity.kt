@@ -6,20 +6,144 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kr.camp.sns.activity.MyPageActivity
+import kr.camp.sns.data.Posting
+import kr.camp.sns.data.User
 import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.databinding.ActivityMainBinding
+import kr.camp.sns.registry.UserRegistry
 
 
 class MainActivity : AppCompatActivity() {
-
+    private val userRegistry = UserRegistry.getInstance()
+    private var user: User? = null
     private var isLogin = false
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var startForResult: ActivityResultLauncher<Intent>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        showDialog(dialogMessage)
+        makeRandomUserPost()
+
+        startForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    isLogin = result.data?.getBooleanExtra(IntentKey.LOGIN, false) ?: false
+                    user = result.data?.getSerializableExtra(IntentKey.USER) as User
+                }
+            }
+
+        binding.mainLoginImageView.setOnClickListener {
+            if (isLogin) {
+                val intent = Intent(this, MyPageActivity::class.java)
+                intent.putExtra(IntentKey.USER, user)
+                startActivity(intent)
+                changeAnimationRightToLeft()
+            } else {
+                val intent = Intent(this, SignInActivity::class.java)
+                startForResult.launch(intent)
+                changeAnimationRightToLeft()
+            }
+        }
+        for (i in userList.indices) {
+            userList[i].apply {
+                customNameTextView.text = defaultUser[i].name
+                customUserProfileImageView.setImageResource(defaultUser[i].profileDrawableId)
+            }
+        }
+
+        for (i in postList) {
+            i.apply {
+                val user = userRegistry.users.random()
+                val post = user.postings.random()
+                val countOfLike = "${post.likeCount} likes"
+                val postString =
+                    SpannableStringBuilder("${user.name} ${post.description}")
+                postString.setSpan(
+                    StyleSpan(Typeface.BOLD),
+                    0,
+                    user.name.length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                customPostHeartImageView.apply {
+                    setOnClickListener {
+                        if (isLogin) {
+                            post.switchLike(user.name)
+                            if (post.isLiked(user.name)) {
+                                setImageResource(R.drawable.like_heart_icon)
+                            } else setImageResource(R.drawable.like_icon)
+                        }
+                    }
+
+                }
+                customPostProfileImageView.setImageResource(user.profileDrawableId)
+                customPostCountOfLikeTextView.text = countOfLike
+                customPostNameTextView.text = user.name
+                customPostMainTextView.text = postString
+                customPostMainImageView.apply {
+                    setImageResource(post.imageDrawableId)
+                    setOnClickListener {
+                        val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                        intent.apply {
+                            putExtra(IntentKey.USER, user)
+                            putExtra(IntentKey.POST, post)
+                        }
+                        startActivity(intent)
+                        changeAnimationBottomToTop()
+                    }
+                }
+            }
+        }
+    }
+
+    private val dialogMessage by lazy {
+        getString(R.string.text_dialog)
+    }
+
+    private fun showDialog(message: String) {
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.apply {
+            setMessage(message)
+            setCancelable(false)
+            setPositiveButton("확인") { a, b ->
+                a.dismiss()
+            }
+        }
+        val dialog = dialogBuilder.create()
+        dialog.show()
+    }
+
+
+    private fun makeRandomUserPost() {
+        //디폴트 유저, 랜덤 포스트 생성
+        repeat(50) {
+            randomPosting.add(Posting(postImageId.random(), getString(postTextId.random())))
+        }
+        defaultUser.forEach { userRegistry.addUser(it) }
+        userRegistry.users.forEach {
+            it.addPostings(randomPosting.random())
+            it.addPostings(randomPosting.random())
+            it.addPostings(randomPosting.random())
+            it.setProfileDrawableId(postImageId.random())
+        }
+    }
+
+    private val userList by lazy {
+        mutableListOf(
+            binding.mainCustomUserItem1,
+            binding.mainCustomUserItem2,
+            binding.mainCustomUserItem3,
+            binding.mainCustomUserItem4,
+            binding.mainCustomUserItem5
+        )
+    }
 
     private val postList by lazy {
         mutableListOf(
@@ -31,131 +155,43 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        
-        startForResult =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == RESULT_OK) {
-                    isLogin = result.data?.getBooleanExtra(IntentKey.LOGIN, false) ?: false
-                }
-            }
-        binding.mainLoginImageView.setOnClickListener {
-            if (isLogin) {
-                val intent = Intent(this, MyPageActivity::class.java)
-                startActivity(intent)
-            } else {
-                val intent = Intent(this, SignInActivity::class.java)
-                startForResult.launch(intent)
-            }
-        }
+    private val defaultUser = arrayOf(
+        User("default_user_id1", "test", "default_name1"),
+        User("default_user_id2", "test", "default_name2"),
+        User("default_user_id3", "test", "default_name3"),
+        User("default_user_id4", "test", "default_name4"),
+        User("default_user_id5", "test", "default_name5")
+    )
 
-        for (i in postList.indices) {
-            postList[i].apply {
-                val post = itemList[i].second
-                val userName = itemList[i].first
-                val countOfLike = "${post.likeCount} likes"
-                val postString =
-                    SpannableStringBuilder("${userName} ${post.description}")
-                postString.setSpan(
-                    StyleSpan(Typeface.BOLD),
-                    0,
-                    userName.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-                customPostCountOfLikeTextView.text = countOfLike
-                customPostNameTextView.text = userName
-                customPostMainTextView.text = postString
-                customPostMainImageView.apply {
-                    setImageResource(post.imageDrawableId)
-                    setOnClickListener {
-                        Toast.makeText(this@MainActivity, "${i + 1} 번 포스트", Toast.LENGTH_SHORT)
-                            .show()
-                        val intent = Intent(this@MainActivity, DetailActivity::class.java)
+    private val postImageId = arrayOf(
+        R.drawable.golden_state_warriors,
+        R.drawable.dog,
+        R.drawable.james_harden,
+        R.drawable.stephen_curry,
+        R.drawable.klay_thompson,
+        R.drawable.kevin_durant,
+        R.drawable.lebron_james,
+        R.drawable.img_donut_glazeddonut,
+        R.drawable.img_test
+    )
 
-                        // User의 이름, Posting 객체 넘겨주셔야 합니다
-                        intent.apply {
-                            putExtra(IntentKey.POST, post)
-                            putExtra(IntentKey.POSTING_USER_NAME, userName)
-                        }
+    private val postTextId by lazy {
+        arrayOf(
+            R.string.text_test1,
+            R.string.text_test2,
+            R.string.text_test3,
+            R.string.text_test4,
+            R.string.text_test5
+        )
+    }
 
-                        startActivity(intent)
-                    }
-                }
-            }
-        }
+    private val randomPosting = mutableListOf<Posting>()
+
+    private fun changeAnimationRightToLeft() {
+        overridePendingTransition(R.anim.slide_left_end, R.anim.slide_right_end)
+    }
+
+    private fun changeAnimationBottomToTop() {
+        overridePendingTransition(R.anim.slide_top_end, R.anim.no_slide)
     }
 }
-
-
-/*
-1. 메인 텍스트뷰 내부의 글: username + post 인데 spannableString 객체를 이용해 포스트는 노말, 유저네임은 볼드로 바꾸기 << 완료
-2. 리사이클러 뷰 어댑터 만들기 << 취소
-3. 유저 추천?은 리사이클러 뷰 쓸지 그냥 include 상태로 내버려 둘 지 고민 << 인클루드 상태로
-4. 원 내부에 원형으로 이미지 넣기 << 카드뷰로 해결
-5.
- */
-
-
-/*
-        binding.mainPostList.adapter = listViewAdapter(this)
-*/
-
-/*        binding.mainLoginImageView.setOnClickListener {
-            if (isLogin) {
-                val intent = Intent(this, MyPageActivity::class.java)
-                startActivity(intent)
-            } else {
-                val intent = Intent(this, SignInActivity::class.java)
-                startForResult.launch(intent)
-            }
-        }*/
-
-
-/*    inner class listViewAdapter(val context: Context) : BaseAdapter() {
-        override fun getCount(): Int {
-            return itemList.count()
-        }
-
-        override fun getItem(position: Int): Any {
-            return itemList[position]
-        }
-
-        override fun getItemId(position: Int): Long {
-            return 0
-        }
-
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            var view = convertView
-            if (view == null) {
-                view =
-                    LayoutInflater.from(context).inflate(R.layout.custom_post_item, parent, false)
-            }
-            val postImage = view!!.findViewById<ImageView>(R.id.customPostMainImageView)
-            val postText = view.findViewById<TextView>(R.id.customPostMainTextView)
-            val postLikeCount = view.findViewById<TextView>(R.id.customPostCountOfLikeTextView)
-
-            val postString =
-                SpannableStringBuilder("${itemList[position].first} ${itemList[position].second.description}")
-
-            postString.setSpan(
-                StyleSpan(Typeface.BOLD),
-                0,
-                itemList[position].first.length,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-
-            val likeCount = "${itemList[position].second.likeCount} likes"
-
-            postLikeCount.text = likeCount
-            postImage.setImageResource(itemList[position].second.imageDrawableId)
-            postText.text = postString
-
-*//*            view.setOnClickListener {
-                val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                startActivity(intent)
-            }*//*
-            return view
-        }
-    }*/

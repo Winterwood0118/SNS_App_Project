@@ -19,6 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/detailTopBannerGuideLine"/>
 
+    <!--
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,6 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/add_icon"/>
 
+    -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/detailTopBannerGuideLine"
         android:layout_width="wrap_content"
@@ -66,6 +68,7 @@
         app:layout_constraintGuide_begin="70dp"/>
 
 
+    <!--
     <ScrollView
         android:id="@+id/detailTopScrollView"
         android:layout_width="0dp"
@@ -171,16 +174,15 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
+    -->
     <View
         android:id="@+id/detailTopThresholdView"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="?colorSecondary"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailTopScrollView"/>
+        app:layout_constraintTop_toTopOf="@+id/detailTopBannerGuideLine"/>
 
 
     <kr.camp.sns.view.CircleImageView
@@ -244,6 +246,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detailCurrentContentImageView"/>
 
+
     <ImageView
         android:id="@+id/detailCurrentContentCommentImageView"
         android:layout_width="wrap_content"
@@ -287,13 +290,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:text="Username: LayoutParams usually are implemented as static classes inside
-        their owning layouts. The most interesting part of
-        a LayoutParams class is the XML constructor - very
-        similar to views' XML constructors. The attrs parameter contains values of style
-        attributes. You can get the layout style attributes from there. Complete example code can
-        be found here. For the layout to use the new LayoutParams class you have to override a
-        couple of methods"
+        android:bufferType="spannable"
+        android:text="@string/text_test1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:maxLines="2"
