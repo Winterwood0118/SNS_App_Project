@@ -8,6 +8,7 @@ import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kr.camp.sns.activity.MyPageActivity
 import kr.camp.sns.data.Posting
@@ -24,70 +25,12 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var startForResult: ActivityResultLauncher<Intent>
 
-    private val userList by lazy {
-        mutableListOf(
-            binding.mainCustomUserItem1,
-            binding.mainCustomUserItem2,
-            binding.mainCustomUserItem3,
-            binding.mainCustomUserItem4,
-            binding.mainCustomUserItem5
-        )
-    }
-
-    private val postList by lazy {
-        mutableListOf(
-            binding.mainPost1,
-            binding.mainPost2,
-            binding.mainPost3,
-            binding.mainPost4,
-            binding.mainPost5
-        )
-    }
-
-    private val defaultUser = arrayOf(
-        User("default_user_id1", "test", "default_name1"),
-        User("default_user_id2", "test", "default_name2"),
-        User("default_user_id3", "test", "default_name3"),
-        User("default_user_id4", "test", "default_name4"),
-        User("default_user_id5", "test", "default_name5")
-    )
-
-    private val postImageId = arrayOf(
-        R.drawable.golden_state_warriors,
-        R.drawable.dog,
-        R.drawable.james_harden,
-        R.drawable.stephen_curry,
-        R.drawable.klay_thompson,
-        R.drawable.kevin_durant,
-        R.drawable.lebron_james,
-        R.drawable.img_donut_glazeddonut,
-        R.drawable.img_test
-    )
-
-    private val postTextId by lazy {
-        arrayOf(
-            R.string.text_test1,
-            R.string.text_test2,
-            R.string.text_test3,
-            R.string.text_test4,
-            R.string.text_test5
-        )
-    }
-
-    private val randomPosting = mutableListOf<Posting>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        //디폴트 유저, 랜덤 포스트 생성
-        repeat(10) {
-            randomPosting.add(Posting(postImageId.random(), getString(postTextId.random())))
-        }
-        defaultUser.forEach { userRegistry.addUser(it) }
-        userRegistry.users.forEach {
-            it.addPostings(randomPosting.random())
-            it.setProfileDrawableId(postImageId.random())
-        }
+
+        showDialog(dialogMessage)
+        makeRandomUserPost()
 
         startForResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -147,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                     setOnClickListener {
                         val intent = Intent(this@MainActivity, DetailActivity::class.java)
                         intent.apply {
-                            putExtra(IntentKey.POSTING_USER_NAME, user.name)
+                            putExtra(IntentKey.USER, user)
                             putExtra(IntentKey.POST, post)
                         }
                         startActivity(intent)
@@ -156,4 +99,88 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    private val dialogMessage by lazy{
+        getString(R.string.text_dialog)
+    }
+
+    private fun showDialog(message: String){
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.apply{
+            setMessage(message)
+            setCancelable(false)
+            setPositiveButton("확인"){ a, b ->
+                a.dismiss()
+            }
+        }
+        val dialog = dialogBuilder.create()
+        dialog.show()
+    }
+
+
+    private fun makeRandomUserPost(){
+        //디폴트 유저, 랜덤 포스트 생성
+        repeat(50) {
+            randomPosting.add(Posting(postImageId.random(), getString(postTextId.random())))
+        }
+        defaultUser.forEach { userRegistry.addUser(it) }
+        userRegistry.users.forEach {
+            it.addPostings(randomPosting.random())
+            it.addPostings(randomPosting.random())
+            it.addPostings(randomPosting.random())
+            it.setProfileDrawableId(postImageId.random())
+        }
+    }
+
+    private val userList by lazy {
+        mutableListOf(
+            binding.mainCustomUserItem1,
+            binding.mainCustomUserItem2,
+            binding.mainCustomUserItem3,
+            binding.mainCustomUserItem4,
+            binding.mainCustomUserItem5
+        )
+    }
+
+    private val postList by lazy {
+        mutableListOf(
+            binding.mainPost1,
+            binding.mainPost2,
+            binding.mainPost3,
+            binding.mainPost4,
+            binding.mainPost5
+        )
+    }
+
+    private val defaultUser = arrayOf(
+        User("default_user_id1", "test", "default_name1"),
+        User("default_user_id2", "test", "default_name2"),
+        User("default_user_id3", "test", "default_name3"),
+        User("default_user_id4", "test", "default_name4"),
+        User("default_user_id5", "test", "default_name5")
+    )
+
+    private val postImageId = arrayOf(
+        R.drawable.golden_state_warriors,
+        R.drawable.dog,
+        R.drawable.james_harden,
+        R.drawable.stephen_curry,
+        R.drawable.klay_thompson,
+        R.drawable.kevin_durant,
+        R.drawable.lebron_james,
+        R.drawable.img_donut_glazeddonut,
+        R.drawable.img_test
+    )
+
+    private val postTextId by lazy {
+        arrayOf(
+            R.string.text_test1,
+            R.string.text_test2,
+            R.string.text_test3,
+            R.string.text_test4,
+            R.string.text_test5
+        )
+    }
+
+    private val randomPosting = mutableListOf<Posting>()
+
 }
