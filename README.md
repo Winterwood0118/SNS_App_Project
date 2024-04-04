@@ -37,3 +37,10 @@
 1. Constraint Layout
 2. ViewBinding
 3. Singleton
+4. GridLayout
+5. Regex
+6. CardView
+7. CustomImageView
+8. TextWatcher
+9. Dialog
+10. EditTextListner
