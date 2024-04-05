@@ -20,15 +20,6 @@ import kr.camp.sns.databinding.LayoutCounterBinding
 class MyPageActivity : AppCompatActivity() {
 
     private companion object {
-        const val NAME_EDIT = "이름 편집"
-        const val MBTI_EDIT = "MBTI 편집"
-        const val DESCRIPTION_EDIT = "소개 편집"
-        const val POSTING = "게시물"
-        const val FOLLOWER = "팔로워"
-        const val FOLLOWING = "팔로잉"
-        const val CONFIRM = "확인"
-        const val CANCEL = "취소"
-
         private val followCountRange = (100..300)
 
         fun getFollow(): Int = followCountRange.random()
