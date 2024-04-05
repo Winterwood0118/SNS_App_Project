@@ -23,7 +23,16 @@ class UserRegistry {
                 Posting(R.drawable.golden_state_warriors, "골든스테이트 워리어스 우승"),
                 Posting(R.drawable.lebron_james, "르브론 제임스입니다!")
             )
-        }
+        },
+        User("wjdwnsgh789", "wjdwnsgh758@", "정준호").apply {
+            setProfileDrawableId(R.drawable.stephen_curry)
+            setMBTI("INFP")
+            setDescription("1인분만")
+            addPostings(
+                Posting(R.drawable.logo_1, "2024한화 우승"),
+                Posting(R.drawable.ruy_1, "류현진 복귀")
+            )
+        },
     )
     
     val users: List<User> = _users
