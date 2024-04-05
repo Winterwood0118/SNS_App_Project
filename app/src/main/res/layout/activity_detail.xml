@@ -193,7 +193,8 @@
         android:layout_margin="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detailTopThresholdView"
-        android:src="@drawable/dog"/>
+        android:src="@drawable/dog"
+        app:backgroundColor="?colorPrimary"/>
 
     <TextView
         android:id="@+id/detailCurrentUserProfileTitleTextView"
