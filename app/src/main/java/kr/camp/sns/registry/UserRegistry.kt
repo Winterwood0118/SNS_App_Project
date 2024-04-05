@@ -51,6 +51,15 @@ class UserRegistry {
                 Posting(R.drawable.hwang, "황희찬 부상에서 복귀")
             )
         },
+        User("qkralstn123", "alstnalstn12!", "박민수").apply {
+            setProfileDrawableId(R.drawable.ic_tag)
+            setMBTI("ENTP")
+            setDescription("오늘도 화이팅!")
+            addPostings(
+                Posting(R.drawable.ic_heart_filled, "팔로워 분들 모두 감사합니다!"),
+                Posting(R.drawable.ic_bookmark, "좋아요 댓글 구독 알림설정 부탁드립니다~")
+            )
+        },
     )
     
     val users: List<User> = _users
