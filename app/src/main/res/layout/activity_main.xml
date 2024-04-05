@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="?colorPrimary">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -33,7 +34,8 @@
                     android:layout_height="40dp"
                     android:src="@drawable/logo_insta"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="?colorOnPrimary"/>
 
                 <ImageView
                     android:id="@+id/mainLoginImageView"
@@ -42,7 +44,8 @@
                     android:src="@drawable/ic_login"
                     app:layout_constraintBottom_toBottomOf="@+id/mainLogoImageView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/mainLogoImageView" />
+                    app:layout_constraintTop_toTopOf="@+id/mainLogoImageView"
+                    app:tint="?colorOnPrimary"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

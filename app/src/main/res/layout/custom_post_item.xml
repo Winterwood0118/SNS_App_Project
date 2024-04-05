@@ -75,7 +75,8 @@
             android:src="@drawable/ic_tripledots"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?colorOnPrimary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--top 끝-->
@@ -112,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:src="@drawable/ic_heart_empty"
+                app:tint="?colorOnPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -122,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:src="@drawable/ic_dm"
+                app:tint="?colorOnPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/customPostHeartImageView"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -133,6 +136,7 @@
                 android:layout_margin="10dp"
                 android:layout_marginStart="8dp"
                 android:src="@drawable/ic_share"
+                app:tint="?colorOnPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/customPostDirectMessageImageView"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -144,6 +148,7 @@
                 android:layout_margin="10dp"
                 android:layout_marginStart="8dp"
                 android:src="@drawable/ic_bookmark"
+                app:tint="?colorOnPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
