@@ -7,5 +7,5 @@
     <string name="text_test5">오늘 저녁은 굶어야겠다.</string>
     <string name="text_dialog">77777번째로 회원가입 하시는 분께 석촌 호수공원을 드립니다!</string>
     <string name="text_ok">확인</string>
-
+    <string name="ellipsis_end"> … 더보기</string>
 </resources>

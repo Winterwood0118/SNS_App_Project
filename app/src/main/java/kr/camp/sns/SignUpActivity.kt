@@ -13,6 +13,7 @@ import kr.camp.sns.data.User
 import kr.camp.sns.databinding.ActivitySignUpBinding
 import kr.camp.sns.intent.IntentKey
 import kr.camp.sns.registry.UserRegistry
+import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
     private val userRegistry = UserRegistry.getInstance()
