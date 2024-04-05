@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity() {
         }
         for (i in userList.indices) {
             userList[i].apply {
-                customNameTextView.text = defaultUser[i].name
-                customUserProfileImageView.setImageResource(defaultUser[i].profileDrawableId)
+                customNameTextView.text = userRegistry.users[i].name
+                customUserProfileImageView.setImageResource(userRegistry.users[i].profileDrawableId)
             }
         }
 
@@ -86,7 +86,17 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 }
-                customPostProfileImageView.setImageResource(user.profileDrawableId)
+                customPostProfileImageView.apply {
+                    setImageResource(user.profileDrawableId)
+                    setOnClickListener {
+                        val intent = Intent(this@MainActivity, MyPageActivity::class.java)
+                        intent.apply {
+                            putExtra(IntentKey.USER, user)
+                            putExtra(IntentKey.LOGIN, false)
+                        }
+                        startActivity(intent)
+                    }
+                }
                 customPostCountOfLikeTextView.text = countOfLike
                 customPostNameTextView.text = user.name
                 customPostMainTextView.text = postString
@@ -130,12 +140,12 @@ class MainActivity : AppCompatActivity() {
         repeat(50) {
             randomPosting.add(Posting(postImageId.random(), getString(postTextId.random())))
         }
-        defaultUser.forEach { userRegistry.addUser(it) }
-        userRegistry.users.forEach {
+        defaultUser.forEach { userRegistry.addUser(it)
             it.addPostings(randomPosting.random())
             it.addPostings(randomPosting.random())
             it.addPostings(randomPosting.random())
             it.setProfileDrawableId(postImageId.random())
+            userRegistry.addUser(it)
         }
     }
 
@@ -160,11 +170,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val defaultUser = arrayOf(
-        User("default_user_id1", "test", "default_name1"),
-        User("default_user_id2", "test", "default_name2"),
-        User("default_user_id3", "test", "default_name3"),
-        User("default_user_id4", "test", "default_name4"),
-        User("default_user_id5", "test", "default_name5")
+        User("strongCheolSoo123", "test", "김철수"),
+        User("mightyJeongSoo456", "test", "박정수"),
+        User("minjeongvly22", "test", "정민정"),
+        User("imEverywhere", "test", "홍길동"),
+        User("luckyJaeSeok", "test", "송재석")
     )
 
     private val postImageId = arrayOf(
