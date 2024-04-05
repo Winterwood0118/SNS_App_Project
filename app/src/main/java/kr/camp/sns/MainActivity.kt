@@ -188,7 +188,7 @@ class MainActivity : AppCompatActivity() {
     private val randomPosting = mutableListOf<Posting>()
 
     private fun changeAnimationRightToLeft() {
-        overridePendingTransition(R.anim.slide_left_end, R.anim.slide_right_end)
+        overridePendingTransition(R.anim.slide_right_start, R.anim.slide_right_end)
     }
 
     private fun changeAnimationBottomToTop() {
