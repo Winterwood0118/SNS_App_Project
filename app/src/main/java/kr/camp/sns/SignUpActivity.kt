@@ -49,12 +49,12 @@ class SignUpActivity : AppCompatActivity() {
                 if (isRegularId(id.toString())) {
                     binding.signUpIdcheckButton.setBackgroundResource(R.drawable.btn_round)
                     binding.signUpIdcheckButton.isEnabled = true
-                    binding.signUpIdeditText.setBackgroundResource(R.drawable.true_box)
+                    binding.signUpIdeditText.setBackgroundResource(R.drawable.rectangle)
                 } else {
                     binding.signUpIdcheckButton.background =
                         ContextCompat.getDrawable(this@SignUpActivity, R.drawable.btn_round2)
                     binding.signUpIdcheckButton.isEnabled = false
-                    binding.signUpIdeditText.setBackgroundResource(R.drawable.false_box)
+                    binding.signUpIdeditText.setBackgroundResource(R.drawable.rectangle2)
                 }
             }
 
@@ -63,15 +63,16 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
         )
-        binding.signUpRepasswordeditText.addTextChangedListener(object : TextWatcher {
+        binding.signUpPasswordeditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
                 if (isRegularPassword(password.toString())) {
-                    binding.signUpPasswordeditText.setBackgroundResource(R.drawable.true_box)
+                    binding.signUpPasswordeditText.setBackgroundResource(R.drawable.rectangle)
                 } else {
-                    binding.signUpPasswordeditText.setBackgroundResource(R.drawable.false_box)
+                    binding.signUpPasswordeditText.setBackgroundResource(R.drawable.rectangle2)
                 }
             }
 
