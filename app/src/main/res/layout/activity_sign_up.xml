@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity"
-    android:background="?colorPrimary">
+    android:background="?colorPrimary"
+    tools:context=".SignUpActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/signUp"
-        android:textColor="#777575"
+        android:textColor="?colorPrimaryContainer"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,11 +26,11 @@
         android:layout_width="345dp"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
+        android:background="@drawable/btn_round"
         android:text="@string/signUpbtn"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        android:background="@drawable/btn_round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpRepasswordeditText" />
@@ -44,6 +44,7 @@
         android:ems="10"
         android:hint="@string/examplePassword"
         android:inputType="textPassword"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +59,7 @@
         android:ems="10"
         android:hint="@string/exampleName"
         android:inputType="text"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,6 +85,7 @@
         android:ems="10"
         android:hint="@string/exampleId"
         android:inputType="text"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/signUpIdcheckButton"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -105,12 +108,12 @@
         android:layout_width="110dp"
         android:layout_height="40dp"
         android:layout_marginStart="5dp"
-        android:text="@string/check"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:background="@drawable/btn_round"
         android:enabled="true"
+        android:text="@string/check"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/signUpIdeditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -137,6 +140,8 @@
         android:ems="10"
         android:hint="@string/examplePassword"
         android:inputType="textPassword"
+        android:textColor="@color/black"
+
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -162,6 +167,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo"
-        app:tint = "?colorOnPrimary"/>
+        app:tint="?colorOnPrimary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
