@@ -86,7 +86,17 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 }
-                customPostProfileImageView.setImageResource(user.profileDrawableId)
+                customPostProfileImageView.apply {
+                    setImageResource(user.profileDrawableId)
+                    setOnClickListener {
+                        val intent = Intent(this@MainActivity, MyPageActivity::class.java)
+                        intent.apply {
+                            putExtra(IntentKey.USER, user)
+                            putExtra(IntentKey.LOGIN, false)
+                        }
+                        startActivity(intent)
+                    }
+                }
                 customPostCountOfLikeTextView.text = countOfLike
                 customPostNameTextView.text = user.name
                 customPostMainTextView.text = postString
@@ -130,12 +140,12 @@ class MainActivity : AppCompatActivity() {
         repeat(50) {
             randomPosting.add(Posting(postImageId.random(), getString(postTextId.random())))
         }
-        defaultUser.forEach { userRegistry.addUser(it) }
-        userRegistry.users.forEach {
+        defaultUser.forEach { userRegistry.addUser(it)
             it.addPostings(randomPosting.random())
             it.addPostings(randomPosting.random())
             it.addPostings(randomPosting.random())
             it.setProfileDrawableId(postImageId.random())
+            userRegistry.addUser(it)
         }
     }
 

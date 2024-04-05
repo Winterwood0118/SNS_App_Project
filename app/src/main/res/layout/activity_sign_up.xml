@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    tools:context=".SignUpActivity"
+    android:background="?colorPrimary">
 
     <TextView
         android:id="@+id/textView"
@@ -68,7 +69,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:text="@string/idType"
-        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/signUpIdeditText"
@@ -95,7 +95,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:text="@string/nameType"
-        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/signUpNameeditText"
@@ -124,7 +123,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:text="@string/passwordType"
-        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/signUpPasswordeditText"
@@ -150,7 +148,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:text="@string/passwordType"
-        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/signUpRepasswordeditText"
@@ -164,6 +161,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo"
+        app:tint = "?colorOnPrimary"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
