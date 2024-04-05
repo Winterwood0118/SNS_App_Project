@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity() {
         }
         for (i in userList.indices) {
             userList[i].apply {
-                customNameTextView.text = defaultUser[i].name
-                customUserProfileImageView.setImageResource(defaultUser[i].profileDrawableId)
+                customNameTextView.text = userRegistry.users[i].name
+                customUserProfileImageView.setImageResource(userRegistry.users[i].profileDrawableId)
             }
         }
 
@@ -160,11 +160,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val defaultUser = arrayOf(
-        User("default_user_id1", "test", "default_name1"),
-        User("default_user_id2", "test", "default_name2"),
-        User("default_user_id3", "test", "default_name3"),
-        User("default_user_id4", "test", "default_name4"),
-        User("default_user_id5", "test", "default_name5")
+        User("strongCheolSoo123", "test", "김철수"),
+        User("mightyJeongSoo456", "test", "박정수"),
+        User("minjeongvly22", "test", "정민정"),
+        User("imEverywhere", "test", "홍길동"),
+        User("luckyJaeSeok", "test", "송재석")
     )
 
     private val postImageId = arrayOf(
