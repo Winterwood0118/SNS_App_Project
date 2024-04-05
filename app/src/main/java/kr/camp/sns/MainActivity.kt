@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
         repeat(50) {
             randomPosting.add(Posting(postImageId.random(), getString(postTextId.random())))
         }
-        defaultUser.forEach { userRegistry.addUser(it)
+        defaultUser.forEach {
             it.addPostings(randomPosting.random())
             it.addPostings(randomPosting.random())
             it.addPostings(randomPosting.random())
