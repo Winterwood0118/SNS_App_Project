@@ -112,13 +112,12 @@ class SignInActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_right_start, R.anim.slide_right_end)
     }
 
-
     // 아이디 유효성 검사 함수
     private fun isRegularId(): Boolean {
         val idEnglish = binding.idEditText.text.toString().trim()
         var idEdit = binding.idEditText
         // 영어, 숫자
-        val idPattern = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z[0-9]]{7,10}$"
+        val idPattern = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z[0-9]]{7,20}$"
         val pattern = Pattern.matches(idPattern, idEnglish)
         if (pattern) {
             // 아이디의 형식이 맞을 경우
@@ -159,5 +158,4 @@ class SignInActivity : AppCompatActivity() {
     fun toast(message : String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
-
 }

@@ -10,11 +10,12 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="150dp"
-        android:src="@drawable/instgram_logo"
+        android:src="@drawable/logo_insta"
         app:layout_constraintBottom_toTopOf="@+id/idEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="?colorPrimary"/>
 
     <EditText
         android:id="@+id/idEditText"
