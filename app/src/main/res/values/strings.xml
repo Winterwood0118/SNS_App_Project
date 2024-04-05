@@ -35,6 +35,14 @@
     <string name="examplePassword">예시) @abcdefg1234</string>
     <string name="exampleId">예시) abcdef23</string>
     <string name="exampleName">예시) 홍길동</string>
+    <string name="name_edit">이름 편집</string>
+    <string name="mbti_edit">MBTI 편집</string>
+    <string name="description_edit">소개 편집</string>
+    <string name="posting">게시물</string>
+    <string name="follower">팔로워</string>
+    <string name="following">팔로잉</string>
+    <string name="confirm">확인</string>
+    <string name="cancle">취소</string>
 
 
 </resources>

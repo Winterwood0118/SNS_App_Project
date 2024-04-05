@@ -36,4 +36,12 @@
     <string name="examplePassword">ex) @abcdefg1234</string>
     <string name="exampleId">ex) abcdef23</string>
     <string name="exampleName">ex) John Doe</string>
+    <string name="name_edit">Edit name</string>
+    <string name="mbti_edit">Edit MBTI</string>
+    <string name="description_edit">Edit description</string>
+    <string name="posting">Posting</string>
+    <string name="follower">Follower</string>
+    <string name="following">Following</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancle">Cancle</string>
 </resources>
