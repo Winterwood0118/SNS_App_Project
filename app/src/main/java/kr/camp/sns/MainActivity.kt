@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             i.apply {
                 val user = userRegistry.users.random()
                 val post = user.postings.random()
-                val countOfLike = "${post.likeCount} likes"
+                val countOfLike = "${post.likeCount} ${getString(R.string.like)}"
                 val postString =
                     SpannableStringBuilder("${user.name} ${post.description}")
                 postString.setSpan(
@@ -197,4 +197,5 @@ class MainActivity : AppCompatActivity() {
     private fun changeAnimationBottomToTop() {
         overridePendingTransition(R.anim.slide_top_end, R.anim.no_slide)
     }
+
 }
