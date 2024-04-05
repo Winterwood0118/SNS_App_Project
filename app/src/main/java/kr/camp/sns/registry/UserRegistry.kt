@@ -41,7 +41,16 @@ class UserRegistry {
                 Posting(R.drawable.img_pla, "심신안정에는 프라모델"),
                 Posting(R.drawable.img_cat, "길가다가 본 고양이")
             )
-        }
+        },
+        User("dlwnsdud123", "dudwnsdl321!", "이준영").apply {
+            setProfileDrawableId(R.drawable.dog)
+            setMBTI("INTP")
+            setDescription("화이팅!")
+            addPostings(
+                Posting(R.drawable.son, "손흥민 400경기 대기록!"),
+                Posting(R.drawable.hwang, "황희찬 부상에서 복귀")
+            )
+        },
     )
     
     val users: List<User> = _users
