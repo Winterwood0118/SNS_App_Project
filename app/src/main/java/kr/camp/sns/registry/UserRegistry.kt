@@ -25,7 +25,7 @@ class UserRegistry {
             )
         },
         User("wjdwnsgh789", "wjdwnsgh758@", "정준호").apply {
-            setProfileDrawableId(R.drawable.stephen_curry)
+            setProfileDrawableId(R.drawable.james_harden)
             setMBTI("INFP")
             setDescription("1인분만")
             addPostings(
