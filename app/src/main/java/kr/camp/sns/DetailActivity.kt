@@ -1,9 +1,7 @@
 package kr.camp.sns
 import android.content.Intent
 import android.graphics.Typeface
-import android.opengl.Visibility
 import android.os.Bundle
-import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.StyleSpan
@@ -111,6 +109,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setNumLikeText(count: Int) {
-        binding.detailCurrentContentNumLikeTextView.text = "$count 좋아요"
+        binding.detailCurrentContentNumLikeTextView.text = "$count ${getString(R.string.like)}"
     }
 }

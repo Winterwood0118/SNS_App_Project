@@ -75,13 +75,13 @@ class MyPageActivity : AppCompatActivity() {
         descriptionTextView.text = user.description
         profileImageView.setImageResource(user.profileDrawableId)
 
-        initEditButton(nameEditButton.editButton, NAME_EDIT, nameTextView)
-        initEditButton(mbtiEditButton.editButton, MBTI_EDIT, mbtiTextView)
-        initEditButton(descriptionEditButton.editButton, DESCRIPTION_EDIT, descriptionTextView)
+        initEditButton(nameEditButton.editButton, getString(R.string.name_edit), nameTextView)
+        initEditButton(mbtiEditButton.editButton, getString(R.string.mbti_edit), mbtiTextView)
+        initEditButton(descriptionEditButton.editButton, getString(R.string.description_edit), descriptionTextView)
 
-        initCounter(postingCounter, user.postings.size, POSTING)
-        initCounter(followerCounter, getFollow(), FOLLOWER)
-        initCounter(followingCounter, getFollow(), FOLLOWING)
+        initCounter(postingCounter, user.postings.size, getString(R.string.posting))
+        initCounter(followerCounter, getFollow(), getString(R.string.follower))
+        initCounter(followingCounter, getFollow(), getString(R.string.following))
 
         postingListView.apply {
             val myPagePostingAdapter = MyPagePostingAdapter(this@MyPageActivity, user.postings)
@@ -123,10 +123,10 @@ class MyPageActivity : AppCompatActivity() {
         AlertDialog.Builder(this).apply {
             setTitle(type)
             setView(input)
-            setPositiveButton(CONFIRM) { _, _ ->
+            setPositiveButton(getString(R.string.confirm)) { _, _ ->
                 textView.text = input.text.toString()
             }
-            setNegativeButton(CANCEL) { dialog, _ ->
+            setNegativeButton(getString(R.string.cancle)) { dialog, _ ->
                 dialog.dismiss()
             }
         }.show()
