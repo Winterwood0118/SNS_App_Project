@@ -30,6 +30,7 @@
     <string name="checked">Checked</string>
     <string name="idType">ID (7~10 English Numbers)</string>
     <string name="passwordType">Password (8~20 Eng Num special characters)</string>
+    <string name="rePasswordType">Re Password (8~20 Eng Num special characters)</string>
     <string name="nameType">Name (Korean or English)</string>
     <string name="check">Check</string>
     <string name="signUpbtn">SignUp</string>

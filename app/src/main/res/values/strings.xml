@@ -30,6 +30,7 @@
     <string name="notpassword">비밀번호를 입력해주세요</string>
     <string name="idType">아이디( 영문,숫자 혼합 7~10자 )</string>
     <string name="passwordType">비밀번호( 영문,숫자,특수문자 혼합 8~20자 )</string>
+    <string name="rePasswordType">비밀번호 확인( 영문,숫자,특수문자 혼합 8~20자 )</string>
     <string name="nameType">이름( 한글 or 영문 )</string>
     <string name="check">중복확인</string>
     <string name="signUpbtn">가입하기</string>
