@@ -13,7 +13,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/black" />
+        android:textColor="?colorOnPrimary" />
 
     <TextView
         android:id="@+id/titleTextView"
@@ -23,6 +23,6 @@
         android:text="숫자"
         android:textAlignment="center"
         android:textSize="14sp"
-        android:textColor="@color/black" />
+        android:textColor="?colorOnPrimary" />
 
 </LinearLayout>

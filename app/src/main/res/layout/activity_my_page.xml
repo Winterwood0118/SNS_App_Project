@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="?colorPrimary">
 
     <TextView
         android:id="@+id/idTextView"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="아이디"
-        android:textColor="@color/black"
+        android:textColor="?colorOnPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/backspaceImageView"
@@ -55,7 +55,7 @@
         android:layout_marginTop="5dp"
         android:text="이름"
         android:textAlignment="viewStart"
-        android:textColor="@color/black"
+        android:textColor="?colorOnPrimary"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +84,7 @@
         android:layout_marginEnd="16dp"
         android:text="설명"
         android:textAlignment="viewStart"
-        android:textColor="@color/black"
+        android:textColor="?colorOnPrimary"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -167,7 +167,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mbtiEditButton"
-        app:srcCompat="@drawable/grid" />
+        app:srcCompat="@drawable/grid"
+        app:tint="?colorOnPrimary" />
 
     <View
         android:id="@+id/selectedLine"
