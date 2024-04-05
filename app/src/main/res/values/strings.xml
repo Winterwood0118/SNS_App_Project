@@ -17,6 +17,7 @@
     <string name="wrong">틀림</string>
     <string name="isRegularId">올바른 ID 형식이 아닙니다.</string>
     <string name="isRegularPassword">올바른 비밀번호 형식이 아닙니다.</string>
+    <string name="inputName">이름을 입력해 주세요.</string>
     <string name="inputId">아이디를 입력해 주세요.</string>
     <string name="inputPassword">비밀번호를 입력해 주세요.</string>
     <string name="inputRePassword">비밀번호를 한번 더 입력해 주세요.</string>

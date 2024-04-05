@@ -45,4 +45,5 @@
     <string name="following">팔로잉</string>
     <string name="confirm">확인</string>
     <string name="cancle">취소</string>
+    <string name="inputName">이름을 입력해 주세요.</string>
 </resources>

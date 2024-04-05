@@ -44,4 +44,5 @@
     <string name="following">Following</string>
     <string name="confirm">Confirm</string>
     <string name="cancle">Cancle</string>
+    <string name="inputName">Please Enter Your Name</string>
 </resources>
