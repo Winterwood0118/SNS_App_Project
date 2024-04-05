@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="?colorPrimary"/>
+        app:tint="?colorOnPrimary"/>
 
     <EditText
         android:id="@+id/idEditText"
@@ -23,10 +23,12 @@
         android:layout_height="wrap_content"
         android:hint="@string/id"
         style="@style/STYLE"
+        android:textColor="@color/black"
         android:layout_marginTop="220dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -34,11 +36,12 @@
         android:layout_height="wrap_content"
         android:hint="@string/password"
         android:inputType="textPassword"
+        android:textColor="@color/black"
         style="@style/STYLE"
         android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/idEditText"/>
+        app:layout_constraintTop_toBottomOf="@id/idEditText" />
 
     <android.widget.Button
         android:id="@+id/loginButton"
