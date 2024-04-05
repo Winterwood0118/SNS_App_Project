@@ -5,4 +5,8 @@
         <attr name="android:layout_width" format="dimension"/>
         <attr name="android:layout_height" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="ExpandableTextView">
+        <attr name="ellipsis" format="string" />
+        <attr name="ellipsisColor" format="color" />
+    </declare-styleable>
 </resources>
