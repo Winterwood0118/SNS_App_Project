@@ -50,9 +50,9 @@ class SignInActivity : AppCompatActivity() {
             // val user = default.find { it.id == inputId && it.password == inputPassword }
 
             when {
-                user == null -> toast("틀림")
-                !isRegularId() -> toast("아이디의 조합이 틀렸습니다")
-                !isRegularPassword() -> toast("비밀번호의 조합이 틀렸습니다")
+                user == null -> toast(getString(R.string.wrong))
+                !isRegularId() -> toast(getString(R.string.isRegularId))
+                !isRegularPassword() -> toast(getString(R.string.isRegularPassword))
                 else -> {
                     // 메인으로 넘김
                     val intent = Intent(this@SignInActivity, MainActivity::class.java)
