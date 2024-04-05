@@ -1,6 +1,7 @@
 package kr.camp.sns.view
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.Gravity
@@ -24,6 +25,8 @@ class CircleImageView : FrameLayout {
             R.styleable.CircleImageView_android_layout_width, 0f)
         val attrsHeightPx = a.getDimension(
             R.styleable.CircleImageView_android_layout_height, 0f)
+        val backgroundColor = a.getColor(
+            R.styleable.CircleImageView_backgroundColor, Color.TRANSPARENT)
 
         val outerBorderSize = min(attrsWidthPx, attrsHeightPx)
         val innerBorderSize = outerBorderSize - outerBorderSize / 15
@@ -62,7 +65,7 @@ class CircleImageView : FrameLayout {
 
         val innerBorderCardView = CardView(context).apply {
             layoutParams = innerLayoutParams
-            setCardBackgroundColor(Color.WHITE)
+            setCardBackgroundColor(backgroundColor)
             radius = innerBorderSize / 2 + 1f
         }
 

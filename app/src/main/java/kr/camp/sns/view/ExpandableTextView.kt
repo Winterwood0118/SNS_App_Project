@@ -13,10 +13,6 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import kr.camp.sns.R
 
-/**
- * Github Link: https://github.com/TheCodeYard/EllipsizedTextView
- * */
-
 class ExpandableTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
