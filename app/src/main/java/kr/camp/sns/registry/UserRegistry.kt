@@ -33,6 +33,15 @@ class UserRegistry {
                 Posting(R.drawable.ruy_1, "류현진 복귀")
             )
         },
+        User("dltjdals125", "random123!", "이성민").apply {
+            setProfileDrawableId(R.drawable.img_test)
+            setMBTI("INFP")
+            setDescription("오늘은 신나는 날이에요")
+            addPostings(
+                Posting(R.drawable.img_pla, "심신안정에는 프라모델"),
+                Posting(R.drawable.img_cat, "길가다가 본 고양이")
+            )
+        }
     )
     
     val users: List<User> = _users
