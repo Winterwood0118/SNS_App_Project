@@ -122,12 +122,12 @@ class SignInActivity : AppCompatActivity() {
         if (pattern) {
             // 아이디의 형식이 맞을 경우
             //텍스트 박스가 파랑색으로 표시
-            idEdit.setBackgroundResource(R.drawable.true_box)
+            idEdit.setBackgroundResource(R.drawable.rectangle)
             return true
         } else {
             // 아이디의 형식이 틀릴 경우
             // 텍스트 박스가 빨간색으로 표시
-            idEdit.setBackgroundResource(R.drawable.false_box)
+            idEdit.setBackgroundResource(R.drawable.rectangle2)
             return false
         }
     }
@@ -145,13 +145,13 @@ class SignInActivity : AppCompatActivity() {
             // 아이디의 형식이 맞을 경우
             //텍스트 박스가 파랑색으로 표시
             notPasswordTextView.visibility = View.GONE
-            passwordEdit.setBackgroundResource(R.drawable.true_box)
+            passwordEdit.setBackgroundResource(R.drawable.rectangle)
             return true
         } else {
             // 아이디의 형식이 틀릴 경우
             // 텍스트 박스가 빨간색으로 표시
             notPasswordTextView.visibility = View.VISIBLE
-            passwordEdit.setBackgroundResource(R.drawable.false_box)
+            passwordEdit.setBackgroundResource(R.drawable.rectangle2)
             return false
         }
     }

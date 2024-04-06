@@ -29,6 +29,7 @@
     <string name="usableId">사용 가능한 아이디 입니다.</string>
     <string name="usedId">이미 존재하는 아이디 입니다</string>
     <string name="checked">확인완료</string>
+    <string name="idchange">아이디 수정하기</string>
     <string name="idType">아이디( 영문,숫자 혼합 7~10자 )</string>
     <string name="passwordType">비밀번호( 영문,숫자,특수문자 혼합 8~20자 )</string>
     <string name="rePasswordType">비밀번호 확인( 영문,숫자,특수문자 혼합 8~20자 )</string>

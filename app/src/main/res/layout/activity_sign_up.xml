@@ -169,4 +169,17 @@
         app:srcCompat="@drawable/logo"
         app:tint="?colorOnPrimary" />
 
+    <Button
+        android:id="@+id/signUpIdchangeButton"
+        android:layout_width="105dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/btn_round3"
+        android:text="@string/idchange"
+        android:textColor="#222020"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/signUpIdcheckButton"
+        app:layout_constraintStart_toStartOf="@+id/signUpIdcheckButton"
+        app:layout_constraintTop_toBottomOf="@+id/signUpIdcheckButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

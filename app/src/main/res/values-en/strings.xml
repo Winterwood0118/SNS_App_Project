@@ -33,6 +33,7 @@
     <string name="rePasswordType">Re Password (8~20 Eng Num special characters)</string>
     <string name="nameType">Name (Korean or English)</string>
     <string name="check">Check</string>
+    <string name="idchange">Change ID</string>
     <string name="signUpbtn">SignUp</string>
     <string name="examplePassword">ex) @abcdefg1234</string>
     <string name="exampleId">ex) abcdef23</string>
