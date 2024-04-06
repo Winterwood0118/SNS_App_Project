@@ -33,6 +33,7 @@
     <string name="rePasswordType">비밀번호 확인( 영문,숫자,특수문자 혼합 8~20자 )</string>
     <string name="nameType">이름( 한글 or 영문 )</string>
     <string name="check">중복확인</string>
+    <string name="idchange">아이디 수정하기</string>
     <string name="signUpbtn">가입하기</string>
     <string name="examplePassword">예시) @abcdefg1234</string>
     <string name="exampleId">예시) abcdef23</string>

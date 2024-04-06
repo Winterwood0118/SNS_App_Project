@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +41,7 @@ class SignUpActivity : AppCompatActivity() {
         val repassword = binding.signUpRepasswordeditText.text
         val name = binding.signUpNameeditText.text
         var idCheck = false
+        binding.signUpIdchangeButton.visibility = View.GONE
 
         binding.signUpIdeditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -82,6 +84,25 @@ class SignUpActivity : AppCompatActivity() {
         }
         )
 
+        binding.signUpRepasswordeditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                if (isRegularRepassword(repassword.toString())) {
+                    binding.signUpRepasswordeditText.setBackgroundResource(R.drawable.rectangle)
+                } else {
+                    binding.signUpRepasswordeditText.setBackgroundResource(R.drawable.rectangle2)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        }
+        )
+
         binding.signUpIdcheckButton.setOnClickListener {
 
             if (id.isBlank()) {
@@ -97,9 +118,21 @@ class SignUpActivity : AppCompatActivity() {
                 binding.signUpIdcheckButton.text = getString(R.string.checked)
                 binding.signUpIdcheckButton.background =
                     ContextCompat.getDrawable(this, R.drawable.btn_round2)
+                binding.signUpIdchangeButton.visibility = View.VISIBLE
                 Toast.makeText(this, getString(R.string.usableId), Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.signUpIdchangeButton.setOnClickListener {
+            idCheck = false
+            binding.signUpIdcheckButton.isEnabled = true
+            binding.signUpIdeditText.isEnabled = true
+            binding.signUpIdcheckButton.text = getString(R.string.check)
+            binding.signUpIdcheckButton.background =
+                ContextCompat.getDrawable(this, R.drawable.btn_round)
+            binding.signUpIdchangeButton.visibility = View.GONE
+        }
+
 
         binding.signUpSignupButton.setOnClickListener {
             val user = User(id.toString(), password.toString(), name.toString())
@@ -143,6 +176,12 @@ class SignUpActivity : AppCompatActivity() {
         val passwordPattern =
             "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&.])[A-Za-z[0-9]$@$!%*#?&.]{8,20}$"
         return Pattern.matches(passwordPattern, password)
+    }
+
+    private fun isRegularRepassword(repassword: String): Boolean {
+        val repasswordPattern =
+            "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&.])[A-Za-z[0-9]$@$!%*#?&.]{8,20}$"
+        return Pattern.matches(repasswordPattern, repassword)
     }
 
 }
