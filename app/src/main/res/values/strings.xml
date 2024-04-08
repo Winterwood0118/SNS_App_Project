@@ -1,3 +1,51 @@
 <resources>
     <string name="app_name">SNS App Project</string>
+    <string name="text_test1"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam maecenas mi non sed ut odio. Non, justo, sed facilisi et. Eget viverra urna, vestibulum egestas faucibus egestas. Sagittis nam velit volutpat eu nunc.</string>
+    <string name="text_test2">오늘은 날씨가 좋네요</string>
+    <string name="text_test3">안녕하세요 잘 부탁 드립니다.</string>
+    <string name="text_test4">지원을 받아 작성된 포스트면 좋겠습니다.</string>
+    <string name="text_test5">오늘 저녁은 굶어야겠다.</string>
+    <string name="text_dialog">77777번째로 회원가입 하시는 분께 석촌 호수공원을 드립니다!</string>
+    <string name="text_ok">확인</string>
+    <string name="ellipsis_end"> … 더보기</string>
+    <string name="login">Login하기</string>
+    <string name="password">비밀번호</string>
+    <string name="id">ID</string>
+    <string name="signUp">회원가입</string>
+    <string name="facebook">Facebook으로 로그인</string>
+    <string name="like">좋아요</string>
+    <string name="wrong">틀림</string>
+    <string name="isRegularId">올바른 ID 형식이 아닙니다.</string>
+    <string name="isRegularPassword">올바른 비밀번호 형식이 아닙니다.</string>
+    <string name="inputName">이름을 입력해 주세요.</string>
+    <string name="inputId">아이디를 입력해 주세요.</string>
+    <string name="inputPassword">비밀번호를 입력해 주세요.</string>
+    <string name="inputRePassword">비밀번호를 한번 더 입력해 주세요.</string>
+    <string name="checkRePassword">비밀번호가 다릅니다.</string>
+    <string name="pleaseIdCheck">아이디 중복확인을 해주세요.</string>
+    <string name="signUpComplete">회원가입이 완료되었습니다.</string>
+    <string name="usableId">사용 가능한 아이디 입니다.</string>
+    <string name="usedId">이미 존재하는 아이디 입니다</string>
+    <string name="checked">확인완료</string>
+    <string name="notpassword">비밀번호를 입력해주세요</string>
+    <string name="idType">아이디( 영문,숫자 혼합 7~10자 )</string>
+    <string name="passwordType">비밀번호( 영문,숫자,특수문자 혼합 8~20자 )</string>
+    <string name="rePasswordType">비밀번호 확인( 영문,숫자,특수문자 혼합 8~20자 )</string>
+    <string name="nameType">이름( 한글 or 영문 )</string>
+    <string name="check">중복확인</string>
+    <string name="idchange">아이디 수정하기</string>
+    <string name="signUpbtn">가입하기</string>
+    <string name="examplePassword">예시) @abcdefg1234</string>
+    <string name="exampleId">예시) abcdef23</string>
+    <string name="exampleName">예시) 홍길동</string>
+    <string name="name_edit">이름 편집</string>
+    <string name="mbti_edit">MBTI 편집</string>
+    <string name="description_edit">소개 편집</string>
+    <string name="posting">게시물</string>
+    <string name="follower">팔로워</string>
+    <string name="following">팔로잉</string>
+    <string name="confirm">확인</string>
+    <string name="cancle">취소</string>
+
+
 </resources>
